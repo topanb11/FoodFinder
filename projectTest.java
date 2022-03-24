@@ -1,3 +1,9 @@
+/*
+    Group 2 Food Bank
+    version: @1.0
+    
+ */
+
 package edu.ucalgary.ensf409;
 
 import org.junit.;
@@ -8,6 +14,7 @@ public class projectTest {
     public projectTest(){
 
     }
+    @Test
 
     @Test
     public void testHamperConstructor(){
@@ -27,6 +34,6 @@ public class projectTest {
     }
 
     @Test
-    public void testHamperAddClientToHamperInvalid
+    public void testHamperAddClientToHamperInvalid {}
 
 }
