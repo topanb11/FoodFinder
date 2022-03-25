@@ -1,7 +1,7 @@
 /*
     Group 2 Food Bank
     version: @1.0
-    
+
  */
 
 package edu.ucalgary.ensf409;
@@ -17,6 +17,10 @@ public class projectTest {
 
     }
     @Test
+    public void testOrderConstructor() {
+        Order order1 = new Order();
+        assertNotNull("The order constructor did not create an object: ", order1);
+    }
 
     @Test
     public void testHamperConstructor(){
@@ -44,4 +48,22 @@ public class projectTest {
     public void testFoodBankGetFood() {
         
     }
+    public void testAddtoOrder() {
+        order1.addToOrder(testHamper);
+        Order expectedOrder = new Order();
+
+        assertEquals("method addToOrder did not return the expected result: ",expectedOrder, foundOrder);
+    }
+
+    @Test
+    public void testPrintOrder() {
+        String orderString = order.printOrder();
+        String expectedOrder = "lorem ipsum cock";
+        assertEquals("method printOrder did not return the expected result: ",expectedOrder);
+    }
+
+    @Test
+    public void testHamperAddClientToHamperInvalid {}
+
+
 }
