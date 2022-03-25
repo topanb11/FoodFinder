@@ -1,7 +1,8 @@
 /*
     Group 2 Food Bank
-    version: @1.0
-
+    Members: Topan Budiman, Maxwell Couture, Mark Ngu, Jason Nguyen
+    version: @1.2
+    since: @1.0
  */
 
 package edu.ucalgary.ensf409;
@@ -45,9 +46,41 @@ public class projectTest {
     }
 
     @Test
-    public void testFoodBankGetFood() {
-        
+    public void testFoodBankConstructor() {
+        FoodBank testBank = new FoodBank();
+        assertNotNull("FoodBank constructor did not return the expected result: ", testBank);
     }
+
+    @Test public void testFoodConstructor() {
+        Food testFood = new Food();
+        assertNotNull("Food constructor did not return the expected result: ", testFood);
+    }
+
+    @Test
+    public void testSearchFood() {
+        String testName = "food";
+        int WG = 12;
+        int fV = 15;
+        int protein = 20;
+        int other = 7;
+        int calories = 700;
+        int testID = testBank.searchFood(name, WG, fV, protein, other, calories);
+        assertEquals("Method searchFood did not return the expected result: ", expectedID, foundID);
+    }
+
+    @Test
+    public void testFoodBankGetFood() {
+        testFood = testBank.getFood(testID);
+        assertEquals("Method getFood did not return the expected result: ", expectedFood, foundFood);
+    }
+
+    @Test
+    public void testHamperAddFood() {
+        testHamper.addFood(testFood);
+        assertEquals("Method addFood did not return the expected result: ", expectedFood, foundFood);
+    }
+
+    @Test
     public void testAddtoOrder() {
         order1.addToOrder(testHamper);
         Order expectedOrder = new Order();
@@ -58,7 +91,7 @@ public class projectTest {
     @Test
     public void testPrintOrder() {
         String orderString = order.printOrder();
-        String expectedOrder = "lorem ipsum cock";
+        String expectedOrder = "lorem ipsum";
         assertEquals("method printOrder did not return the expected result: ",expectedOrder);
     }
 
