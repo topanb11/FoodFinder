@@ -6,6 +6,8 @@
 
 package edu.ucalgary.ensf409;
 
+import java.beans.Transient;
+
 import org.junit.;
 import static org.junit.Assert.;
 
@@ -35,8 +37,11 @@ public class projectTest {
 
     @Test
     public void testHamperAddClientToHamperInvalid() {
-        System.out.println("topan is a bucktee");
+    
     }
-    public void testHamperAddClientToHamperInvalid {}
 
+    @Test
+    public void testFoodBankGetFood() {
+        
+    }
 }
