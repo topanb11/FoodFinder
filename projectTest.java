@@ -1,7 +1,7 @@
 /*
     Group 2 Food Bank
     Members: Topan Budiman, Maxwell Couture, Mark Ngu, Jason Nguyen
-    version: @1.2
+    version: @1.3
     since: @1.0
  */
 
@@ -19,7 +19,7 @@ public class projectTest {
     }
     @Test
     public void testOrderConstructor() {
-        Order order1 = new Order();
+        Order testOrder = new Order();
         assertNotNull("The order constructor did not create an object: ", order1);
     }
 
@@ -84,18 +84,23 @@ public class projectTest {
     }
 
     @Test
-    public void testAddtoOrder() {
-        order1.addToOrder(testHamper);
-        Order expectedOrder = new Order();
+    public void testAddToOrder() {
+        Hamper testHamper = new Hamper();
+        Order testOrder = new Order();
+        testOrder.addToOrder(testHamper);
+        String foundOrder = testOrder.printOrder();
+        String expectedOrder = "some order w hamper items";
 
         assertEquals("method addToOrder did not return the expected result: ",expectedOrder, foundOrder);
     }
-
     @Test
     public void testPrintOrder() {
-        String orderString = order.printOrder();
-        String expectedOrder = "lorem ipsum";
-        assertEquals("method printOrder did not return the expected result: ",expectedOrder);
+        Hamper testHamper = new Hamper();
+        Order testOrder = new Order();
+        String foundOrder = order.printOrder();
+        String expectedOrder = "some order";
+
+        assertEquals("method printOrder did not return the expected result: ",expectedOrder, foundOrder);
     }
 
     @Test
