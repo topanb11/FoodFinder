@@ -61,19 +61,31 @@ public class projectTest {
     // and will return the name of the food item if it exists. Otherwise false
     @Test
     public void testSearchFood() {
-        FoodBank foodDataBase = new FoodBank();
+        FoodBank testBank = new FoodBank();
         int WG = 12;
         int fV = 15;
         int protein = 20;
         int other = 7;
         int calories = 700;
-        int expectedID = foodDataBase.searchFood(WG, fV, protein, other, calories);
+
+        int foundID = foodDataBase.searchFood(WG, fV, protein, other, calories);
+        int expectedID = 69;
         assertEquals("Method searchFood did not return the expected result: ", expectedID, foundID);
     }
 
     @Test
     public void testFoodBankGetFood() {
-        expectedFood = testBank.getFood(testID);
+        FoodBank testBank = new FoodBank();
+        Food foundFood = testBank.getFood(69);
+
+        int ID = 69;
+        int WG = 12;
+        int fV = 15;
+        int protein = 20;
+        int other = 7;
+        int calories = 700;
+        Food expectedFood = new Food(ID, WG, fV, protein, other, calories);
+
         assertEquals("Method getFood did not return the expected result: ", expectedFood, foundFood);
     }
 
