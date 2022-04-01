@@ -116,7 +116,68 @@ public class projectTest {
     }
 
     @Test
-    public void testHamperAddClientToHamperInvalid {}
+    public void removeClientTestValidData(){
+        Hamper testHamper = new Hamper();
+        Client testClient = new Client(1);
+        testHamper.addClientToHamper(testClient.getClientInfo());
+        testHamper.removeClient(1);
+        ArrayList<Client> expectedList = new ArrayList<Client>();
+        ArrayList<Client> foundList = testHamper.getClientList();
+        assertEquals("Client was not removed properly: ", expectedList, foundList);
+    }
+    @Test
+    public void removeClientTestInvalidData(){
+        boolean correctExeption = false;
+        try{
+            Hamper testHamper = new Hamper();
+            Client testClient = new Client(1);
+            testHamper.addClientToHamper(testClient.getClientInfo());
+            testHamper.removeClient(5);
+        }catch(IllegalArgumentException e){
+            correctExeption = true;
+        }
+        assertEquals("removeClient did not properly throw and exception: ", true, correctExeption);
+    }
 
+    @Test
+    public void getClientTest(){
+        Hamper testHamper = new Hamper();
+        Client testClient = new Client(1);
+        testHamper.addClientToHamper(testClient.getClientInfo());
+        ArrayList<Client> expectedList = new ArrayList<Client>();
+        expectedList.add(testClient);
+        Client testClient1 = new Client(2);
+        testHamper.addClientToHamper(testClient1.getClientInfo());
+        expectedList.add(testClient1);
+        ArrayList<Client> foundList = testHamper.getClient();
+        assertEquals("The returned ArrayList was not correct: ", expectedList, foundList);
+    }
 
+    @Test
+    public void getClientInfoTest(){
+        Client testClient = new Client(2);
+        ClientType expectedClientType = ADULTFEMALE;
+        ClientType foundClientType = testClient.getClientInfo();
+        assertEquals("getClientInfo returned the wrong enum: ", expectedClientType, foundClient);
+    }
+
+    @Test
+    public void clientConstructorTestGoodData(){
+        Client testClient = new Client(2);
+        String expectedClientType = "AdultFemale";
+        String foundClientType = testClient.getClientInfo().asString();
+        assertEquals("The constructor improperly made a client object: ", expectedClientType, foundClient);
+    }
+
+    @Test
+    public void clientConstructorTestBadData(){
+        boolean correctException = false;
+        try{
+            Client testClient = new Client(893);
+        }catch(IllegalArgumentException e){
+            correctException = true;
+        }
+
+        assertEquals("The constructor did not throw the exception: ", true, correctException);
+    }
 }
