@@ -7,10 +7,10 @@
 
 package edu.ucalgary.ensf409;
 
+import java.util.*;
 import java.beans.Transient;
-
-import org.junit.;
-import static org.junit.Assert.;
+import org.junit.*;
+import static org.junit.Assert.*;
 
 public class projectTest {
 
@@ -56,21 +56,24 @@ public class projectTest {
         assertNotNull("Food constructor did not return the expected result: ", testFood);
     }
 
+    // searchFood(int wholeGrain, int fV, int protein, int other, int calories) should
+    // access the database and search for a food item with the given macronutrients
+    // and will return the name of the food item if it exists. Otherwise false
     @Test
     public void testSearchFood() {
-        String testName = "food";
+        FoodBank foodDataBase = new FoodBank();
         int WG = 12;
         int fV = 15;
         int protein = 20;
         int other = 7;
         int calories = 700;
-        int testID = testBank.searchFood(name, WG, fV, protein, other, calories);
+        int expectedID = foodDataBase.searchFood(WG, fV, protein, other, calories);
         assertEquals("Method searchFood did not return the expected result: ", expectedID, foundID);
     }
 
     @Test
     public void testFoodBankGetFood() {
-        testFood = testBank.getFood(testID);
+        expectedFood = testBank.getFood(testID);
         assertEquals("Method getFood did not return the expected result: ", expectedFood, foundFood);
     }
 
