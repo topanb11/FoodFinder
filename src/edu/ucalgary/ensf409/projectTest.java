@@ -1,14 +1,12 @@
-/*
-    Group 2 Food Bank
+package edu.ucalgary.ensf409;/*
+    Group 2 edu.ucalgary.ensf409.Food Bank
     Members: Topan Budiman, Maxwell Couture, Mark Ngu, Jason Nguyen
     version: @1.3
     since: @1.0
  */
 
-package edu.ucalgary.ensf409;
-
 import java.util.*;
-import java.beans.Transient;
+
 import org.junit.*;
 import static org.junit.Assert.*;
 
@@ -48,12 +46,12 @@ public class projectTest {
     @Test
     public void testFoodBankConstructor() {
         FoodBank testBank = new FoodBank();
-        assertNotNull("FoodBank constructor did not return the expected result: ", testBank);
+        assertNotNull("edu.ucalgary.ensf409.FoodBank constructor did not return the expected result: ", testBank);
     }
 
     @Test public void testFoodConstructor() {
         Food testFood = new Food();
-        assertNotNull("Food constructor did not return the expected result: ", testFood);
+        assertNotNull("edu.ucalgary.ensf409.Food constructor did not return the expected result: ", testFood);
     }
 
     // searchFood(int wholeGrain, int fV, int protein, int other, int calories) should
@@ -123,7 +121,7 @@ public class projectTest {
         testHamper.removeClient(1);
         ArrayList<Client> expectedList = new ArrayList<Client>();
         ArrayList<Client> foundList = testHamper.getClientList();
-        assertEquals("Client was not removed properly: ", expectedList, foundList);
+        assertEquals("edu.ucalgary.ensf409.Client was not removed properly: ", expectedList, foundList);
     }
     @Test
     public void removeClientTestInvalidData(){
