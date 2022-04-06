@@ -177,4 +177,6 @@ public class projectTest {
 
         assertEquals("The constructor did not throw the exception: ", true, correctException);
     }
+
+    hi
 }
