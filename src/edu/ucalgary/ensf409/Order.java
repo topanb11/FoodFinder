@@ -10,7 +10,7 @@ public class Order {
         this.ORDERNUMBER = 69;
     }
 
-    public void addToOrder(Hamper hamper) {
+    public void addToOrder(Hamper hamper) throws IllegalArgumentException{
     }
 
     public String printOrder() {}
