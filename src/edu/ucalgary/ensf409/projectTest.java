@@ -1,4 +1,6 @@
-package edu.ucalgary.ensf409;/*
+package edu.ucalgary.ensf409;
+
+/*
     Group 2 edu.ucalgary.ensf409.Food Bank
     Members: Topan Budiman, Maxwell Couture, Mark Ngu, Jason Nguyen
     version: @1.3
