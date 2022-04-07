@@ -17,7 +17,7 @@ public class projectTest {
     @Test
     public void testOrderConstructor() {
         Order testOrder = new Order();
-        assertNotNull("The order constructor did not create an object: ", order1);
+        assertNotNull("The order constructor did not create an object: ", testOrder);
     }
 
     @Test
@@ -65,7 +65,7 @@ public class projectTest {
         int other = 7;
         int calories = 700;
 
-        int foundID = foodDataBase.searchFood(WG, fV, protein, other, calories);
+        int foundID = testBank.searchFood(WG, fV, protein, other, calories);
         int expectedID = 69;
         assertEquals("Method searchFood did not return the expected result: ", expectedID, foundID);
     }
