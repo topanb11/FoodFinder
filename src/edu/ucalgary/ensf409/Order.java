@@ -20,5 +20,7 @@ public class Order {
     public void addToOrder(Hamper hamper) throws IllegalArgumentException{
     }
 
-    public String printOrder() {}
+    public String printOrder() {
+        return null;
+    }
 }

@@ -25,4 +25,32 @@ public class Food {
         this.OTHER = other;
         this.CALORIES = calories;
     }
+
+    public int getID() {
+        return this.ID;
+    }
+
+    public String getFoodName() {
+        return this.FOODNAME;
+    }
+
+    public int getGrain() {
+        return this.GRAINCONTENT;
+    }
+
+    public int getFV() {
+        return this.FVCONTENT;
+    }
+
+    public int getProtein() {
+        return this.PROCONTENT;
+    }
+
+    public int getOther() {
+        return this.OTHER;
+    }
+
+    public int getCalories() {
+        return this.CALORIES;
+    }
 }
