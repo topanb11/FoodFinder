@@ -17,7 +17,7 @@ public class FoodBank {
     private final String PASSWORD;
     private Connection dbConnect;
     private HashMap<Integer, Food> foodList = new HashMap<Integer, Food>();
-    private ArrayList<String> trashList = new ArrayList<String>();
+    private ArrayList<String> foodCart = new ArrayList<String>();
 
     public FoodBank(String url, String user, String pw) {
         this.DBURL = url;
@@ -30,11 +30,56 @@ public class FoodBank {
     public String getPassword() {return this.PASSWORD;}
 
     public Food getFood(int ID){
-        return null;
+        return this.foodList.get(ID);
     }
 
-    public int searchFood(int wG, int fV, int pro, int other, int calories) {
-        return 0;
+    public int searchFood(float currMacro, int index){
+        float prevDiff = currMacro;
+        int ID = 0;
+        float foodMacro = 0;
+        for(Integer key : foodList.keySet()){
+            Food tmpItem = foodList.get(key);
+            switch(index){
+                case 2:
+                    foodMacro = tmpItem.getGrain();
+                    break;
+                case 3:
+                    foodMacro = tmpItem.getFV();
+                    break;
+                case 4:
+                    foodMacro = tmpItem.getProtein();
+                    break;
+                case 5:
+                    foodMacro = tmpItem.getOther();
+                    break;
+                case 6:
+                    foodMacro = tmpItem.getCalories();
+                    break;
+            }
+            float currDiff = Math.abs(currMacro - foodMacro);
+            if(currDiff <= prevDiff){
+                ID = tmpItem.getID();
+                prevDiff = currDiff;
+            }
+        }
+        return ID;
+    }
+
+    public void fillFood(float targetMacro, float total, int[] calculated, int index){
+        if(targetMacro > total){
+            return;
+        } else {
+            int ID = searchFood(total - targetMacro, index + 2);
+            Food tmpFood = getFood(ID);
+            foodCart.add(tmpFood.getFoodName());
+            foodList.remove(ID);
+            calculated[0] += tmpFood.getGrain();
+            calculated[1] += tmpFood.getFV();
+            calculated[2] += tmpFood.getProtein();
+            calculated[3] += tmpFood.getOther();
+            calculated[4] += tmpFood.getCalories();
+            fillFood(targetMacro + calculated[index], total, calculated, index);
+        }
     }
 
     public void initializeConnection() {
@@ -67,5 +112,13 @@ public class FoodBank {
         FoodBank cock = new FoodBank("jdbc:mysql://localhost/FOOD_INVENTORY", "root", "topanb11");
         cock.initializeConnection();
         cock.storeFood();
+        int[] expected = {10332, 17136, 16002, 13230, 56700};
+        int[] actual = {0, 0, 0, 0, 0};
+        cock.initializeConnection();
+        cock.storeFood();
+        ArrayList<String> weiner = new ArrayList<>();
+        for(int i = 0; i < actual.length; i++){
+            cock.fillFood(actual[i], expected[i], actual, i);
         }
     }
+}

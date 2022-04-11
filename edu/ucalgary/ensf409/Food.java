@@ -27,30 +27,30 @@ public class Food {
     }
 
     public int getID() {
-        return this.ID;
+        return this.ID ;
     }
 
     public String getFoodName() {
         return this.FOODNAME;
     }
 
-    public int getGrain() {
-        return this.GRAINCONTENT;
+    public float getGrain() {
+        return (float) (this.GRAINCONTENT / 100) * getCalories();
     }
 
-    public int getFV() {
-        return this.FVCONTENT;
+    public float getFV() {
+        return (float) (this.FVCONTENT / 100) * getCalories();
     }
 
-    public int getProtein() {
-        return this.PROCONTENT;
+    public float getProtein() {
+        return (float) (this.PROCONTENT / 100) * getCalories();
     }
 
-    public int getOther() {
-        return this.OTHER;
+    public float getOther() {
+        return (float) (this.OTHER / 100) * getCalories();
     }
 
-    public int getCalories() {
+    public float getCalories() {
         return this.CALORIES;
     }
 }
