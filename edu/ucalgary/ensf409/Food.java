@@ -12,7 +12,7 @@ public class Food {
     private final String FOODNAME;
     private final int GRAINCONTENT;
     private final int FVCONTENT;
-    private final int PROCONTENT;
+    private final int PROTEIN;
     private final int OTHER;
     private final int CALORIES;
 
@@ -21,7 +21,7 @@ public class Food {
         this.FOODNAME = foodName;
         this.GRAINCONTENT = grainC;
         this.FVCONTENT = fvC;
-        this.PROCONTENT = proC;
+        this.PROTEIN = proC;
         this.OTHER = other;
         this.CALORIES = calories;
     }
@@ -34,23 +34,23 @@ public class Food {
         return this.FOODNAME;
     }
 
-    public float getGrain() {
-        return (float) (this.GRAINCONTENT / 100) * getCalories();
+    public double getGrain() {
+        return this.GRAINCONTENT / 100.0 * getCalories();
     }
 
-    public float getFV() {
-        return (float) (this.FVCONTENT / 100) * getCalories();
+    public double getFV() {
+        return this.FVCONTENT / 100.0 * getCalories();
     }
 
-    public float getProtein() {
-        return (float) (this.PROCONTENT / 100) * getCalories();
+    public double getProtein() {
+        return this.PROTEIN / 100.0 * getCalories();
     }
 
-    public float getOther() {
-        return (float) (this.OTHER / 100) * getCalories();
+    public double getOther() {
+        return this.OTHER / 100.0 * getCalories();
     }
 
-    public float getCalories() {
+    public double getCalories() {
         return this.CALORIES;
     }
 }

@@ -1,7 +1,7 @@
 /*
     Group 2 edu.ucalgary.ensf409.Food Bank
     Members: Topan Budiman, Maxwell Couture, Mark Ngu, Jason Nguyen
-    version: @1.3
+    version: @1.5
     since: @1.0
  */
 
@@ -29,47 +29,48 @@ public class FoodBank {
     public String getUsername() {return this.USERNAME;}
     public String getPassword() {return this.PASSWORD;}
 
+
     public Food getFood(int ID){
         return this.foodList.get(ID);
     }
 
-    public int searchFood(float currMacro, int index){
-        float prevDiff = currMacro;
+    public int searchFood(double targetMacro, int index){
+        double prevDiff = targetMacro;
+        double foodMacro = 0;
         int ID = 0;
-        float foodMacro = 0;
         for(Integer key : foodList.keySet()){
             Food tmpItem = foodList.get(key);
             switch(index){
-                case 2:
+                case 0:
                     foodMacro = tmpItem.getGrain();
                     break;
-                case 3:
+                case 1:
                     foodMacro = tmpItem.getFV();
                     break;
-                case 4:
+                case 2:
                     foodMacro = tmpItem.getProtein();
                     break;
-                case 5:
+                case 3:
                     foodMacro = tmpItem.getOther();
                     break;
-                case 6:
+                case 4:
                     foodMacro = tmpItem.getCalories();
                     break;
             }
-            float currDiff = Math.abs(currMacro - foodMacro);
-            if(currDiff <= prevDiff){
-                ID = tmpItem.getID();
+            double currDiff = Math.abs(targetMacro - foodMacro);
+            if(currDiff < prevDiff + 100){
                 prevDiff = currDiff;
+                ID = tmpItem.getID();
             }
         }
         return ID;
     }
 
-    public void fillFood(float targetMacro, float total, int[] calculated, int index){
-        if(targetMacro > total){
-            return;
+    public ArrayList<String> fillFood(double currMacro, double targetMacro, double[] calculated, int index){
+        if(currMacro > targetMacro){
+            return foodCart;
         } else {
-            int ID = searchFood(total - targetMacro, index + 2);
+            int ID = searchFood(targetMacro - currMacro, index);
             Food tmpFood = getFood(ID);
             foodCart.add(tmpFood.getFoodName());
             foodList.remove(ID);
@@ -78,8 +79,9 @@ public class FoodBank {
             calculated[2] += tmpFood.getProtein();
             calculated[3] += tmpFood.getOther();
             calculated[4] += tmpFood.getCalories();
-            fillFood(targetMacro + calculated[index], total, calculated, index);
+            fillFood(calculated[index], targetMacro, calculated, index);
         }
+        return foodCart;
     }
 
     public void initializeConnection() {
@@ -112,13 +114,13 @@ public class FoodBank {
         FoodBank cock = new FoodBank("jdbc:mysql://localhost/FOOD_INVENTORY", "root", "topanb11");
         cock.initializeConnection();
         cock.storeFood();
-        int[] expected = {10332, 17136, 16002, 13230, 56700};
-        int[] actual = {0, 0, 0, 0, 0};
+        double[] expected = {10332, 17136, 12772, 13230, 56700};
+        double[] actual = {0, 0, 0, 0, 0};
         cock.initializeConnection();
         cock.storeFood();
         ArrayList<String> weiner = new ArrayList<>();
         for(int i = 0; i < actual.length; i++){
-            cock.fillFood(actual[i], expected[i], actual, i);
+            weiner = cock.fillFood(actual[i], expected[i], actual, i);
         }
     }
 }
