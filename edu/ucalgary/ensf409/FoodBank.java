@@ -1,8 +1,11 @@
 /*
     Group 2 edu.ucalgary.ensf409.Food Bank
     Members: Topan Budiman, Maxwell Couture, Mark Ngu, Jason Nguyen
-    version: @1.5
+    version: @1.6
     since: @1.0
+
+    This class is responsible for connecting to the database as well as maintaining the
+    items used in it as well
  */
 
 package edu.ucalgary.ensf409;
@@ -19,21 +22,60 @@ public class FoodBank {
     private HashMap<Integer, Food> foodList = new HashMap<Integer, Food>();
     private ArrayList<String> foodCart = new ArrayList<String>();
 
+    /**
+     *
+     * @param url is the url of the database
+     * @param user is the username to access the database
+     * @param pw is the password used in order to access the database
+     */
     public FoodBank(String url, String user, String pw) {
         this.DBURL = url;
         this.USERNAME = user;
         this.PASSWORD = pw;
     }
 
-    public String getDburl() {return this.DBURL;}
+    /**
+     * This method is a getter for the database url
+     * @return String This returns the url of the databse
+     */
+    public String getDburl() {
+        return this.DBURL;
+    }
+
+    /**
+     * This method is a getter for the username to access
+     * the database
+     * @return String This returns the username for the database
+     */
     public String getUsername() {return this.USERNAME;}
+
+    /**
+     * This method is a getter for the password to access
+     * the database
+     * @return String This returns the password for the database
+     */
     public String getPassword() {return this.PASSWORD;}
 
 
+    /**
+     * This method is a getter that retrieves the food item from the foodList
+     * hashmap, using the ID which corresponds to the key in foodList
+     * @param ID This is a unique int that corresponds to a specific food object
+     * @return Food This returns a Food object with the matching ID
+     */
     public Food getFood(int ID){
         return this.foodList.get(ID);
     }
 
+    /**
+     * This method is responsible for searching for a Food object that has
+     * macro-nutrients that are closest to the targetMacro
+     * @param targetMacro This is a double that represents the macro-nutrient we
+     *                    are searching for
+     * @param index This is an int corresponding to each food grouping, i.e 0 is grain and 1
+     *              would be fruits & veggies
+     * @return int This returns an int that corresponds to the unique ID for a Food object
+     */
     public int searchFood(double targetMacro, int index){
         double prevDiff = targetMacro;
         double foodMacro = 0;
@@ -66,6 +108,19 @@ public class FoodBank {
         return ID;
     }
 
+    /**
+     * This method is a recursive function that is used to fill the foodCart ArrayList
+     * with Food objects that best suit the user's nutritional needs
+     * @param currMacro This is a double that represents the value of the
+     *                  macro-nutrient that is being filled
+     * @param targetMacro This is a double that represents the total value
+     *                    of the specific macro-nutrient that is being filled
+     * @param calculated This is a double array that contains all the calculated
+     *                   value when searching for the most suitable Food items
+     * @param index This is an int that corresponds to a specific food grouping
+     *              i.e) 0 is for grain and 1 is for fruits & veggies
+     * @return ArrayList<String> this returns an ArrayList of all the found food items
+     */
     public ArrayList<String> fillFood(double currMacro, double targetMacro, double[] calculated, int index){
         if(currMacro > targetMacro){
             return foodCart;
@@ -84,6 +139,9 @@ public class FoodBank {
         return foodCart;
     }
 
+    /**
+     * This method is responsible for initializing the connection to the inventory.sql
+     */
     public void initializeConnection() {
         try{
             dbConnect = DriverManager.getConnection(getDburl(), getUsername(), getPassword());
@@ -92,6 +150,11 @@ public class FoodBank {
         }
     }
 
+    /**
+     * This method is responsible for reading the Food items from the inventory.sql
+     * database and storing all the items locally. This also assigns each Food item
+     * a unique ID
+     */
     public void storeFood(){
         int i = 0;
         try{
