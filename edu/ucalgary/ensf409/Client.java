@@ -6,7 +6,7 @@
  */
 
 package edu.ucalgary.ensf409;
-//TEST TEXT
+
 public class Client {
     private ClientType clientType;
     private int WHOLEGRAINS;
@@ -17,7 +17,7 @@ public class Client {
 
     /**
      *
-     * @param type is the clientType of the client object
+     * @param type is the url of the database
      */
     public Client(int type){
         if(type == 0){
