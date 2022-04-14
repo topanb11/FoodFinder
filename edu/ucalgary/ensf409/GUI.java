@@ -43,7 +43,7 @@ public class GUI implements ActionListener {
     }
 
     /**
-     * This method responds to actions performed in the GUI, 
+     * This method responds to actions performed in the GUI,
      * such as the pressing of buttons.
      * @param e - Pressing button actions
      * 'Add Hamper' button - Part of main 'Order' frame.
@@ -148,11 +148,11 @@ class HamperPanel extends JPanel {
             }
         });
         */
-    
+
         clientType.add(clientLabel);
         clientType.add(textField);
 
-        return 
+        return
     }
 
     public JPanel getHamperPanel() {

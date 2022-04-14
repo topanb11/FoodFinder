@@ -9,6 +9,7 @@ package edu.ucalgary.ensf409;
 
 import java.util.*;
 import org.junit.*;
+import org.testng.annotations.Test;
 import static org.junit.Assert.*;
 
 public class projectTest {
@@ -47,17 +48,18 @@ public class projectTest {
     @Test
     public void testFoodBankConstructor() {
         FoodBank testBank = new FoodBank();
-        assertNotNull("edu.ucalgary.ensf409.FoodBank constructor did not return the expected result: ", testBank);
+        assertNotNull("FoodBank constructor did not return the expected result: ", testBank);
     }
 
     @Test public void testFoodConstructor() {
         Food testFood = new Food();
-        assertNotNull("edu.ucalgary.ensf409.Food constructor did not return the expected result: ", testFood);
+        assertNotNull("Food constructor did not return the expected result: ", testFood);
     }
 
-    // searchFood(int wholeGrain, int fV, int protein, int other, int calories) should
-    // access the database and search for a food item with the given macronutrients
-    // and will return the name of the food item if it exists. Otherwise false
+    /** searchFood(int wholeGrain, int fV, int protein, int other, int calories) should
+     * access the database and search for a food item with the given macronutrients
+     * and will return the name of the food item if it exists. Otherwise false
+    */
     @Test
     public void testSearchFood() {
         FoodBank testBank = new FoodBank();
