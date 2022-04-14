@@ -22,6 +22,7 @@ public class Client extends SQL{
      */
     public Client(int type){
         try {
+            initializeConnection();
             Statement myStmt = getDbConnect().createStatement();
             ResultSet clientInfo = myStmt.executeQuery("SELECT * FROM DAILY_CLIENT_NEEDS");
             if (type == 0) {
@@ -121,5 +122,9 @@ public class Client extends SQL{
      */
     public double getGrain(){
         return this.WHOLEGRAINS;
+    }
+
+    public static void main(String[] args) {
+        Client cocklicker = new Client(0);
     }
 }

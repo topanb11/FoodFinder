@@ -24,7 +24,7 @@ public class FoodBank extends SQL {
     public FoodBank() {}
 
     /**
-     * This method is a getter that retrieves the food item from the foodList
+     * This is a getter that retrieves the food item from the foodList
      * hashmap, using the ID which corresponds to the key in foodList
      * @param ID This is a unique int that corresponds to a specific food object
      * @return Food This returns a Food object with the matching ID
@@ -146,18 +146,4 @@ public class FoodBank extends SQL {
             e.printStackTrace();
         }
     }
-
-//    public static void main(String[] args) {
-//        FoodBank cock = new FoodBank();
-//        cock.initializeConnection();
-//        cock.storeFood();
-//        double[] expected = {10332, 17136, 12772, 13230, 56700};
-//        double[] actual = {0, 0, 0, 0, 0};
-//        cock.initializeConnection();
-//        cock.storeFood();
-//        ArrayList<String> weiner = new ArrayList<>();
-//        for(int i = 0; i < actual.length; i++){
-//            weiner = cock.fillFood(actual[i], expected[i], actual, i);
-//        }
-//    }
 }
