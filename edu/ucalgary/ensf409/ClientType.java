@@ -17,13 +17,11 @@ enum ClientType {
         public String asString(){
             return "Adult Female";
         }
-
     },
     CHILDOVER8{
         public String asString(){
             return "Child Over 8";
         }
-
     },
     CHILDUNDER8{
         public String asString(){
