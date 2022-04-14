@@ -50,13 +50,13 @@ public class Hamper {
      * This method calculates the total number of nutrients needed for the hamper
      * @return int[] this returns an integer array with each index corresponding to a nutrient
      */
-    public int[] calculateNut(){
-        int[] totalNut = new int[5];
+    public double[] calculateNut(){
+        double[] totalNut = new double[5];
         for(Client client : clientNumber){
-            totalNut[0] += client.getGrain();
-            totalNut[1] += client.getFV();
-            totalNut[2] += client.getProtein();
-            totalNut[3] += client.getOther();
+            totalNut[0] += (client.getGrain() * client.getCalories());
+            totalNut[1] += (client.getFV() * client.getCalories());
+            totalNut[2] += (client.getProtein() * client.getCalories());
+            totalNut[3] += (client.getOther() * client.getCalories());
             totalNut[4] += client.getCalories();
         }
         return totalNut;
