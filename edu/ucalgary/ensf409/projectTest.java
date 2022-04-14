@@ -16,34 +16,48 @@ public class projectTest {
     public projectTest(){
 
     }
+
+    //The order class should create an order object. If this object is not created (null)
+    //the constructor failed.
     @Test
     public void testOrderConstructor() {
         Order testOrder = new Order();
         assertNotNull("The order constructor did not create an object: ", testOrder);
     }
-
+    //The hamper class should create a hamper object. If this object is not created (null)
+    //the constructor failed.
     @Test
     public void testHamperConstructor(){
         Hamper testHamper = new Hamper();
         assertNotNull("The hamper constructor did not create an object: ", testHamper);
     }
 
+    //This test adds a client to a hamper object and checks to see if the client was succesfully added.
     @Test
     public void testHamperAddClientToHamperGoodData(){
         Hamper testHamper = new Hamper();
         Client testClient = new Client(1);
-        testHamper.addClientToHamper(testClient.getClientInfo());
+        testHamper.addClientToHamper(1);
         ArrayList<Client> expectedList = new ArrayList<Client>();
         expectedList.add(testClient);
         foundList = testHamper.getClientList();
         assertEquals("Method addClientToHamper did not return the expected result: ", expectedList, foundList);
     }
-
+    //Creates a hamper object and adds a client to the hamper with an invalid integer.
     @Test
     public void testHamperAddClientToHamperInvalid() {
+        Hamper testHamper = new Hamper();
+        boolean test = true;
+        try {
+            testHamper.addClientToHamper(5);
 
+        }catch(IllegalArgumentException e){
+            test = false;
+        }
+        assertEquals("Method did not throw the correct exception: ", false, test);
     }
 
+    //Creates a FoodBank object and checks to see if it was created.
     @Test
     public void testFoodBankConstructor() {
         FoodBank testBank = new FoodBank();
@@ -72,6 +86,7 @@ public class projectTest {
         assertEquals("Method searchFood did not return the expected result: ", expectedID, foundID);
     }
 
+
     @Test
     public void testFoodBankGetFood() {
         FoodBank testBank = new FoodBank();
@@ -86,12 +101,6 @@ public class projectTest {
         Food expectedFood = new Food(ID, WG, fV, protein, other, calories);
 
         assertEquals("Method getFood did not return the expected result: ", expectedFood, foundFood);
-    }
-
-    @Test
-    public void testHamperAddFood() {
-        testHamper.addFood(testFood);
-        assertEquals("Method addFood did not return the expected result: ", expectedFood, foundFood);
     }
 
     @Test
@@ -113,7 +122,45 @@ public class projectTest {
 
         assertEquals("method printOrder did not return the expected result: ",expectedOrder, foundOrder);
     }
+    //Creates a client object and checks to see if the object is null. It then checks if the returned client object
+    //has the correct type.
+    @Test
+    public void clientConstructorTestGoodData(){
+        Client testClient = new Client(1);
+        assertNotNull("The constructor did not make a client object: ", testClient);
+        String expectedClientType = "AdultFemale";
+        String foundClientType = testClient.getClientInfo().asString();
+        assertEquals("The constructor improperly made a client object: ", expectedClientType, foundClientType);
+    }
+    //Creates a client object with bad data. Checks to see if client constructor throws the correct constructor.
+    @Test
+    public void clientConstructorTestBadData(){
+        boolean correctException = false;
+        try{
+            Client testClient = new Client(893);
+        }catch(IllegalArgumentException e){
+            correctException = true;
+        }
 
+        assertEquals("The constructor did not throw the exception: ", true, correctException);
+    }
+    //Creates a hamper and client object. it then adds the client to the hamper and checks to see if the returned arraylist
+    //matches the expected arraylist with the client object added.
+    @Test
+    public void getClientTest(){
+        Hamper testHamper = new Hamper();
+        Client testClient = new Client(1);
+        testHamper.addClientToHamper(testClient.getClientInfo());
+        ArrayList<Client> expectedList = new ArrayList<Client>();
+        expectedList.add(testClient);
+        Client testClient1 = new Client(2);
+        testHamper.addClientToHamper(testClient1.getClientInfo());
+        expectedList.add(testClient1);
+        ArrayList<Client> foundList = testHamper.getClient();
+        assertEquals("The returned ArrayList was not correct: ", expectedList, foundList);
+    }
+    //Creates a hamper and client object. It then adds the client to the hamper before removing it. Checks to see if the client
+    //was correctly removed.
     @Test
     public void removeClientTestValidData(){
         Hamper testHamper = new Hamper();
@@ -124,6 +171,7 @@ public class projectTest {
         ArrayList<Client> foundList = testHamper.getClientList();
         assertEquals("edu.ucalgary.ensf409.Client was not removed properly: ", expectedList, foundList);
     }
+    //Creates a hamper and client object. It adds a client object before removing a client object that doesn't exist.
     @Test
     public void removeClientTestInvalidData(){
         boolean correctExeption = false;
@@ -138,47 +186,18 @@ public class projectTest {
         assertEquals("removeClient did not properly throw and exception: ", true, correctExeption);
     }
 
-    @Test
-    public void getClientTest(){
-        Hamper testHamper = new Hamper();
-        Client testClient = new Client(1);
-        testHamper.addClientToHamper(testClient.getClientInfo());
-        ArrayList<Client> expectedList = new ArrayList<Client>();
-        expectedList.add(testClient);
-        Client testClient1 = new Client(2);
-        testHamper.addClientToHamper(testClient1.getClientInfo());
-        expectedList.add(testClient1);
-        ArrayList<Client> foundList = testHamper.getClient();
-        assertEquals("The returned ArrayList was not correct: ", expectedList, foundList);
-    }
-
+    //Creates a client object and checks to see if the correct enumeration (type) was created in association with the
+    //client object.
     @Test
     public void getClientInfoTest(){
-        Client testClient = new Client(2);
+        Client testClient = new Client(1);
         ClientType expectedClientType = ClientType.ADULTFEMALE;
         ClientType foundClientType = testClient.getClientInfo();
         assertEquals("getClientInfo returned the wrong enum: ", expectedClientType, foundClientType);
     }
 
-    @Test
-    public void clientConstructorTestGoodData(){
-        Client testClient = new Client(2);
-        String expectedClientType = "AdultFemale";
-        String foundClientType = testClient.getClientInfo().asString();
-        assertEquals("The constructor improperly made a client object: ", expectedClientType, foundClientType);
-    }
-
-    @Test
-    public void clientConstructorTestBadData(){
-        boolean correctException = false;
-        try{
-            Client testClient = new Client(893);
-        }catch(IllegalArgumentException e){
-            correctException = true;
-        }
-
-        assertEquals("The constructor did not throw the exception: ", true, correctException);
-    }
+    //Creates a client object and then checks to see if the expected nutritional values are returned by the getters of the
+    //client object.
     @Test
     public void clientTestGetters(){
         Client testClient = new Client(0);
