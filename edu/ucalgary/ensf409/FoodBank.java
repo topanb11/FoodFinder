@@ -1,7 +1,7 @@
 /*
     Group 2 edu.ucalgary.ensf409.Food Bank
     Members: Topan Budiman, Maxwell Couture, Mark Ngu, Jason Nguyen
-    version: @1.6
+    version: @1.7
     since: @1.0
 
     This class is responsible for connecting to the database as well as maintaining the
@@ -17,6 +17,11 @@ import java.util.HashMap;
 public class FoodBank extends SQL {
     private HashMap<Integer, Food> foodList = new HashMap<Integer, Food>();
     private ArrayList<String> foodCart = new ArrayList<String>();
+
+    /**
+     * This is the constructor for the FoodBank object
+     */
+    public FoodBank() {}
 
     /**
      * This method is a getter that retrieves the food item from the foodList
@@ -80,7 +85,7 @@ public class FoodBank extends SQL {
      *                   value when searching for the most suitable Food items
      * @param index This is an int that corresponds to a specific food grouping
      *              i.e) 0 is for grain and 1 is for fruits & veggies
-     * @return ArrayList<String> this returns an ArrayList of all the found food items
+     * @return ArrayList<String> This returns an ArrayList of all the found food items
      */
     public ArrayList<String> fillFood(double currMacro, double targetMacro, double[] calculated, int index){
         if(currMacro > targetMacro){
@@ -124,7 +129,12 @@ public class FoodBank extends SQL {
         }
     }
 
-
+    /**
+     * This method is responsible for deleting the items from the database
+     * once they have been fetched
+     * @param key This parameter is the String which specifies the name of the
+     *            Food item that needs to be deleted
+     */
     public void deleteFromDB(String key) {
         try {
             String query = "DELETE FROM AVAILABLE_FOOD WHERE Name= ? LIMIT 1";
