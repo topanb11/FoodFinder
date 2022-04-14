@@ -53,15 +53,27 @@ public class Hamper {
     public double[] calculateNut(){
         double[] totalNut = new double[5];
         for(Client client : clientNumber){
-            totalNut[0] += (client.getGrain() * client.getCalories());
-            totalNut[1] += (client.getFV() * client.getCalories());
-            totalNut[2] += (client.getProtein() * client.getCalories());
-            totalNut[3] += (client.getOther() * client.getCalories());
-            totalNut[4] += client.getCalories();
+            totalNut[0] += ((client.getGrain() * client.getCalories()) * 7);
+            totalNut[1] += ((client.getFV() * client.getCalories()) * 7);
+            totalNut[2] += ((client.getProtein() * client.getCalories()) * 7);
+            totalNut[3] += ((client.getOther() * client.getCalories()) * 7);
+            totalNut[4] += (client.getCalories() * 7);
         }
         return totalNut;
     }
-    fillHamper(){
-
+    /**
+     * This method fills the hamperFood ArrayList based on the calculated nutrients of the hamper
+     */
+    public void fillHamper(){
+        FoodBank bank = new FoodBank();
+        bank.initializeConnection();
+        bank.storeFood();
+        double[] expected = calculateNut();
+        double[] actual = {0, 0, 0, 0, 0};
+        bank.initializeConnection();
+        bank.storeFood();
+        for(int i = 0; i < actual.length; i++){
+            this.hamperFood = bank.fillFood(actual[i], expected[i], actual, i);
+        }
     }
 }
