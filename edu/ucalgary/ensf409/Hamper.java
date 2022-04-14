@@ -76,4 +76,53 @@ public class Hamper {
             this.hamperFood = bank.fillFood(actual[i], expected[i], actual, i);
         }
     }
+    /**
+     * This method turns the clientNumber ArrayList into a String with the amount of clients
+     * @return String this returns the clients in the ArrayList as a String
+     */
+    public String getClientList(){
+        int adultMaleNum = 0;
+        int adultFemaleNum = 0;
+        int childOver8Num = 0;
+        int childUnder8Num = 0;
+        String list = "";
+        for(Client client : this.clientNumber){
+            if(client.getClientInfo().asString().equals("Adult Male")){
+                adultMaleNum++;
+            }
+            else if(client.getClientInfo().asString().equals("Adult Female")){
+                adultFemaleNum++;
+            }
+            else if(client.getClientInfo().asString().equals("Child Over 8")){
+                childOver8Num++;
+            }
+            else if(client.getClientInfo().asString().equals("Child Under 8")){
+                childUnder8Num++;
+            }
+        }
+        if(adultMaleNum > 0){
+            list += (adultMaleNum + " Adult Male, ");
+        }
+        if(adultFemaleNum > 0){
+            list += (adultFemaleNum + " Adult Female, ");
+        }
+        if(childOver8Num > 0){
+            list += (childOver8Num + " Child Over 8, ");
+        }
+        if(childUnder8Num > 0){
+            list += (childUnder8Num + " Child Under 8");
+        }
+        return list;
+    }
+    /**
+     * This method turns the ArrayList hamperFood into a String with each of the foods listed
+     * @return String this returns the food in the ArrayList as a String
+     */
+    public String getFoodList(){
+        String list = "";
+        for(String food : hamperFood){
+            list += (food + "\n");
+        }
+        return list;
+    }
 }
