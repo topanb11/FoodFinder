@@ -88,6 +88,7 @@ public class FoodBank extends SQL {
         } else {
             int ID = searchFood(targetMacro - currMacro, index);
             Food tmpFood = getFood(ID);
+            deleteFromDB(tmpFood.getFoodName());
             foodCart.add(tmpFood.getFoodName());
             foodList.remove(ID);
             calculated[0] += tmpFood.getGrain();
@@ -118,6 +119,18 @@ public class FoodBank extends SQL {
                 i++;
             }
             myStmt.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+
+    public void deleteFromDB(String key) {
+        try {
+            String query = "DELETE FROM AVAILABLE_FOOD WHERE Name= ? LIMIT 1";
+            PreparedStatement preparedStmt = getDbConnect().prepareStatement(query);
+            preparedStmt.setString(1, key);
+            preparedStmt.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
         }
