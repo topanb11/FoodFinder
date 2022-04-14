@@ -14,48 +14,9 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class FoodBank {
-    private final String DBURL;
-    private final String USERNAME;
-    private final String PASSWORD;
-    private Connection dbConnect;
+public class FoodBank extends SQL {
     private HashMap<Integer, Food> foodList = new HashMap<Integer, Food>();
     private ArrayList<String> foodCart = new ArrayList<String>();
-
-    /**
-     *
-     * @param url is the url of the database
-     * @param user is the username to access the database
-     * @param pw is the password used in order to access the database
-     */
-    public FoodBank(String url, String user, String pw) {
-        this.DBURL = url;
-        this.USERNAME = user;
-        this.PASSWORD = pw;
-    }
-
-    /**
-     * This method is a getter for the database url
-     * @return String This returns the url of the databse
-     */
-    public String getDburl() {
-        return this.DBURL;
-    }
-
-    /**
-     * This method is a getter for the username to access
-     * the database
-     * @return String This returns the username for the database
-     */
-    public String getUsername() {return this.USERNAME;}
-
-    /**
-     * This method is a getter for the password to access
-     * the database
-     * @return String This returns the password for the database
-     */
-    public String getPassword() {return this.PASSWORD;}
-
 
     /**
      * This method is a getter that retrieves the food item from the foodList
@@ -140,27 +101,16 @@ public class FoodBank {
     }
 
     /**
-     * This method is responsible for initializing the connection to the inventory.sql
-     */
-    public void initializeConnection() {
-        try{
-            dbConnect = DriverManager.getConnection(getDburl(), getUsername(), getPassword());
-        } catch(SQLException e){
-            e.printStackTrace();
-        }
-    }
-
-    /**
      * This method is responsible for reading the Food items from the inventory.sql
      * database and storing all the items locally. This also assigns each Food item
      * a unique ID
      */
-    public void storeFood(){
+    public void storeFood() {
         int i = 0;
-        try{
-            Statement myStmt = dbConnect.createStatement();
+        try {
+            Statement myStmt = getDbConnect().createStatement();
             ResultSet foodInfo = myStmt.executeQuery("SELECT * FROM AVAILABLE_FOOD");
-            while(foodInfo.next()){
+            while (foodInfo.next()) {
                 Food tmp = new Food(i, foodInfo.getString("Name"), foodInfo.getInt("GrainContent"),
                         foodInfo.getInt("FVContent"), foodInfo.getInt("ProContent"),
                         foodInfo.getInt("Other"), foodInfo.getInt("Calories"));
@@ -168,13 +118,13 @@ public class FoodBank {
                 i++;
             }
             myStmt.close();
-        } catch (SQLException e){
+        } catch (SQLException e) {
             e.printStackTrace();
         }
     }
 
     public static void main(String[] args) {
-        FoodBank cock = new FoodBank("jdbc:mysql://localhost/FOOD_INVENTORY", "root", "topanb11");
+        FoodBank cock = new FoodBank();
         cock.initializeConnection();
         cock.storeFood();
         double[] expected = {10332, 17136, 12772, 13230, 56700};
