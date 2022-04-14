@@ -61,10 +61,10 @@ public class projectTest {
     @Test
     public void testSearchFood() {
         FoodBank testBank = new FoodBank();
-        int WG = 12;
-        int fV = 15;
-        int protein = 20;
-        int other = 7;
+        double WG = 12;
+        double fV = 15;
+        double protein = 20;
+        double other = 7;
         int calories = 700;
 
         int foundID = testBank.searchFood(WG, fV, protein, other, calories);
@@ -178,5 +178,24 @@ public class projectTest {
         }
 
         assertEquals("The constructor did not throw the exception: ", true, correctException);
+    }
+    @Test
+    public void clientTestGetters(){
+        Client testClient = new Client(0);
+        double expectedGrain = 16;
+        double expectedFV = 28;
+        double expectedProtein = 26;
+        double expectedOther = 30;
+        double expectedCalories = 2500;
+        double foundGrain = testClient.getGrain();
+        double foundFV = testClient.getFV();
+        double foundProtein = testClient.getProtein();
+        double foundOther = testClient.getOther();
+        double foundCalories = testClient.getCalories();
+        assertEquals("The getter for grain returns an incorrect double: ", expectedGrain, foundGrain);
+        assertEquals("The getter for fruit and veggies returns an incorrect double: ", expectedFV, foundFV);
+        assertEquals("The getter for protein returns an incorrect double: ", expectedProtein, foundProtein);
+        assertEquals("The getter for other returns an incorrect double: ", expectedOther, foundOther);
+        assertEquals("The getter for calories returns an incorrect double: ", expectedCalories, foundCalories);
     }
 }
