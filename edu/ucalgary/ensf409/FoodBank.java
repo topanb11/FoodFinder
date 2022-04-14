@@ -1,7 +1,7 @@
 /*
     Group 2 edu.ucalgary.ensf409.Food Bank
     Members: Topan Budiman, Maxwell Couture, Mark Ngu, Jason Nguyen
-    version: @1.7
+    version: @1.8
     since: @1.0
 
     This class is responsible for connecting to the database as well as maintaining the
@@ -93,8 +93,9 @@ public class FoodBank extends SQL {
         } else {
             int ID = searchFood(targetMacro - currMacro, index);
             Food tmpFood = getFood(ID);
+            String line = String.format("%s\t\t%s", tmpFood.getID(), tmpFood.getFoodName());
             deleteFromDB(tmpFood.getFoodName());
-            foodCart.add(tmpFood.getFoodName());
+            foodCart.add(line);
             foodList.remove(ID);
             calculated[0] += tmpFood.getGrain();
             calculated[1] += tmpFood.getFV();
@@ -112,7 +113,7 @@ public class FoodBank extends SQL {
      * a unique ID
      */
     public void storeFood() {
-        int i = 0;
+        int i = 1;
         try {
             Statement myStmt = getDbConnect().createStatement();
             ResultSet foodInfo = myStmt.executeQuery("SELECT * FROM AVAILABLE_FOOD");
@@ -146,17 +147,17 @@ public class FoodBank extends SQL {
         }
     }
 
-    public static void main(String[] args) {
-        FoodBank cock = new FoodBank();
-        cock.initializeConnection();
-        cock.storeFood();
-        double[] expected = {10332, 17136, 12772, 13230, 56700};
-        double[] actual = {0, 0, 0, 0, 0};
-        cock.initializeConnection();
-        cock.storeFood();
-        ArrayList<String> weiner = new ArrayList<>();
-        for(int i = 0; i < actual.length; i++){
-            weiner = cock.fillFood(actual[i], expected[i], actual, i);
-        }
-    }
+//    public static void main(String[] args) {
+//        FoodBank cock = new FoodBank();
+//        cock.initializeConnection();
+//        cock.storeFood();
+//        double[] expected = {10332, 17136, 12772, 13230, 56700};
+//        double[] actual = {0, 0, 0, 0, 0};
+//        cock.initializeConnection();
+//        cock.storeFood();
+//        ArrayList<String> weiner = new ArrayList<>();
+//        for(int i = 0; i < actual.length; i++){
+//            weiner = cock.fillFood(actual[i], expected[i], actual, i);
+//        }
+//    }
 }
