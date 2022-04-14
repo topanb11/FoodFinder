@@ -17,7 +17,7 @@ public class Client extends SQL{
     private double CALORIES;
 
     /**
-     *
+     *Constructor for Client object
      * @param type is an integer representing what enum to use
      */
     public Client(int type){
