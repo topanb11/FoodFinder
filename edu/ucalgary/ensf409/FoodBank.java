@@ -5,7 +5,7 @@
     since: @1.0
 
     This class is responsible for connecting to the database as well as maintaining the
-    items used in it as well
+    items used in it
  */
 
 package edu.ucalgary.ensf409;
