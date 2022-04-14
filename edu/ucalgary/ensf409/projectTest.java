@@ -155,9 +155,9 @@ public class projectTest {
     @Test
     public void getClientInfoTest(){
         Client testClient = new Client(2);
-        ClientType expectedClientType = ADULTFEMALE;
+        ClientType expectedClientType = ClientType.ADULTFEMALE;
         ClientType foundClientType = testClient.getClientInfo();
-        assertEquals("getClientInfo returned the wrong enum: ", expectedClientType, foundClient);
+        assertEquals("getClientInfo returned the wrong enum: ", expectedClientType, foundClientType);
     }
 
     @Test
@@ -165,7 +165,7 @@ public class projectTest {
         Client testClient = new Client(2);
         String expectedClientType = "AdultFemale";
         String foundClientType = testClient.getClientInfo().asString();
-        assertEquals("The constructor improperly made a client object: ", expectedClientType, foundClient);
+        assertEquals("The constructor improperly made a client object: ", expectedClientType, foundClientType);
     }
 
     @Test

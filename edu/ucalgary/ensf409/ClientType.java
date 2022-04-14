@@ -7,5 +7,28 @@
 
 package edu.ucalgary.ensf409;
 
-public class ClientType {
+enum ClientType {
+    ADULTMALE{
+        public String asString(){
+            return "Adult Male";
+        }
+    },
+    ADULTFEMALE{
+        public String asString(){
+            return "Adult Female";
+        }
+
+    },
+    CHILDOVER8{
+        public String asString(){
+            return "Child Over 8";
+        }
+
+    },
+    CHILDUNDER8{
+        public String asString(){
+            return "Child Under 8";
+        }
+    };
+    public abstract String asString();
 }
