@@ -4,6 +4,8 @@
     version: @1.7
     since: @1.0
  */
+package edu.ucalgary.ensf409;
+
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
@@ -22,7 +24,6 @@ public class GUIHamperPanel extends Frame implements ActionListener{
 
     private JPanel hamperPanel = new JPanel();
     private static JButton removeHamperButton;
-    private static JLabel hamperNumLabel;
 
     public GUIHamperPanel() {
         hamperPanel = new JPanel(new BoxLayout(hamperPanel, BoxLayout.X_AXIS));
@@ -62,7 +63,6 @@ public class GUIHamperPanel extends Frame implements ActionListener{
 
 class GUIClientPanel extends JPanel {
     private JPanel clientPanel;
-    private static Dimension panelSize = new Dimension(50, 50);
 
     public GUIClientPanel() {}
 
