@@ -7,7 +7,6 @@
 
 package edu.ucalgary.ensf409;
 /**
- *
  * the enumerations for Client class
  */
 enum ClientType {
