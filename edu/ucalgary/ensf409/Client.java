@@ -28,10 +28,10 @@ public class Client extends SQL{
                 this.clientType = ClientType.ADULTMALE;
                 while(clientInfo.next()){
                     if(clientInfo.getString("Client").equals("Adult Male")){
-                        this.WHOLEGRAINS = clientInfo.getInt("WholeGrains")/100;
-                        this.FRUITVEGGIES = clientInfo.getInt("FruitsVeggies")/100;
-                        this.PROTEIN = clientInfo.getInt("Protein")/100;
-                        this.OTHER = clientInfo.getInt("Other")/100;
+                        this.WHOLEGRAINS = (double)clientInfo.getInt("WholeGrains")/100;
+                        this.FRUITVEGGIES = (double)clientInfo.getInt("FruitsVeggies")/100;
+                        this.PROTEIN = (double)clientInfo.getInt("Protein")/100;
+                        this.OTHER = (double)clientInfo.getInt("Other")/100;
                         this.CALORIES = clientInfo.getInt("Calories");
                         break;
                     }
@@ -40,10 +40,10 @@ public class Client extends SQL{
                 this.clientType = ClientType.ADULTFEMALE;
                 while(clientInfo.next()){
                     if(clientInfo.getString("Client").equals("Adult Female")){
-                        this.WHOLEGRAINS = clientInfo.getInt("WholeGrains")/100;
-                        this.FRUITVEGGIES = clientInfo.getInt("FruitsVeggies")/100;
-                        this.PROTEIN = clientInfo.getInt("Protein")/100;
-                        this.OTHER = clientInfo.getInt("Other")/100;
+                        this.WHOLEGRAINS = (double)clientInfo.getInt("WholeGrains")/100;
+                        this.FRUITVEGGIES = (double)clientInfo.getInt("FruitsVeggies")/100;
+                        this.PROTEIN = (double)clientInfo.getInt("Protein")/100;
+                        this.OTHER = (double)clientInfo.getInt("Other")/100;
                         this.CALORIES = clientInfo.getInt("Calories");
                         break;
                     }
@@ -52,10 +52,10 @@ public class Client extends SQL{
                 this.clientType = ClientType.CHILDOVER8;
                 while(clientInfo.next()){
                     if(clientInfo.getString("Client").equals("Child over 8")){
-                        this.WHOLEGRAINS = clientInfo.getInt("WholeGrains")/100;
-                        this.FRUITVEGGIES = clientInfo.getInt("FruitsVeggies")/100;
-                        this.PROTEIN = clientInfo.getInt("Protein")/100;
-                        this.OTHER = clientInfo.getInt("Other")/100;
+                        this.WHOLEGRAINS = (double)clientInfo.getInt("WholeGrains")/100;
+                        this.FRUITVEGGIES = (double)clientInfo.getInt("FruitsVeggies")/100;
+                        this.PROTEIN = (double)clientInfo.getInt("Protein")/100;
+                        this.OTHER = (double)clientInfo.getInt("Other")/100;
                         this.CALORIES = clientInfo.getInt("Calories");
                         break;
                     }
@@ -64,10 +64,10 @@ public class Client extends SQL{
                 this.clientType = ClientType.CHILDUNDER8;
                 while(clientInfo.next()){
                     if(clientInfo.getString("Client").equals("Child under 8")){
-                        this.WHOLEGRAINS = clientInfo.getInt("WholeGrains")/100;
-                        this.FRUITVEGGIES = clientInfo.getInt("FruitsVeggies")/100;
-                        this.PROTEIN = clientInfo.getInt("Protein")/100;
-                        this.OTHER = clientInfo.getInt("Other")/100;
+                        this.WHOLEGRAINS = (double)clientInfo.getInt("WholeGrains")/100;
+                        this.FRUITVEGGIES = (double)clientInfo.getInt("FruitsVeggies")/100;
+                        this.PROTEIN = (double)clientInfo.getInt("Protein")/100;
+                        this.OTHER = (double)clientInfo.getInt("Other")/100;
                         this.CALORIES = clientInfo.getInt("Calories");
                         break;
                     }
