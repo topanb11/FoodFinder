@@ -29,7 +29,7 @@ public class Client extends SQL{
                 while(clientInfo.next()){
                     if(clientInfo.getString("Client").equals("Adult Male")){
                         this.WHOLEGRAINS = (double)clientInfo.getInt("WholeGrains")/100;
-                        this.FRUITVEGGIES = (double)clientInfo.getInt("FruitsVeggies")/100;
+                        this.FRUITVEGGIES = (double)clientInfo.getInt("FruitVeggies")/100;
                         this.PROTEIN = (double)clientInfo.getInt("Protein")/100;
                         this.OTHER = (double)clientInfo.getInt("Other")/100;
                         this.CALORIES = clientInfo.getInt("Calories");
