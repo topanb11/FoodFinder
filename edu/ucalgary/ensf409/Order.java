@@ -11,7 +11,7 @@ import java.util.ArrayList;
 
 public class Order {
     private final int ORDERNUMBER;
-    private ArrayList<Hamper> hamperItems;
+    private ArrayList<Hamper> hamperItems = new ArrayList<Hamper>();
 
     public Order() {
         this.ORDERNUMBER = 69;
