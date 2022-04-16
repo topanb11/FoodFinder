@@ -1,12 +1,13 @@
 /*
     Group 2 edu.ucalgary.ensf409.Food Bank
     Members: Topan Budiman, Maxwell Couture, Mark Ngu, Jason Nguyen
-    version: @1.3
+    version: @1.4
     since: @1.0
  */
 
 package edu.ucalgary.ensf409;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class Hamper {
@@ -65,14 +66,15 @@ public class Hamper {
      * This method fills the hamperFood ArrayList based on the calculated nutrients of the hamper
      */
     public void fillHamper(){
-        FoodBank bank = new FoodBank();
-        bank.initializeConnection();
-        bank.storeFood();
+        FoodBank bank = null;
+        try {
+            bank = new FoodBank();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
         double[] expected = calculateNut();
         double[] actual = {0, 0, 0, 0, 0};
-        bank.initializeConnection();
-        bank.storeFood();
-        for(int i = 0; i < actual.length; i++){
+        for (int i = 0; i < actual.length; i++) {
             this.hamperFood = bank.fillFood(actual[i], expected[i], actual, i);
         }
         for(int i = 0; i < actual.length; i++){
