@@ -1,7 +1,7 @@
 /*
     Group 2 edu.ucalgary.ensf409.Food Bank
     Members: Topan Budiman, Maxwell Couture, Mark Ngu, Jason Nguyen
-    version: @1.8
+    version: @1.9
     since: @1.0
 
     This class is responsible for connecting to the database as well as maintaining the
@@ -21,7 +21,10 @@ public class FoodBank extends SQL {
     /**
      * This is the constructor for the FoodBank object
      */
-    public FoodBank() {}
+    public FoodBank() throws SQLException{
+        initializeConnection();
+        storeFood();
+    }
 
     /**
      * This is a getter that retrieves the food item from the foodList
