@@ -75,6 +75,25 @@ public class Hamper {
         for(int i = 0; i < actual.length; i++){
             this.hamperFood = bank.fillFood(actual[i], expected[i], actual, i);
         }
+        for(int i = 0; i < actual.length; i++){
+            if(actual[i] < expected[i]){
+                if(i == 0){
+                    System.out.println("Not enough grains");
+                }
+                if(i == 1){
+                    System.out.println("Not enough fruits and veggies");
+                }
+                if(i == 2){
+                    System.out.println("Not enough protein");
+                }
+                if(i == 3){
+                    System.out.println("Not enough other nutrients");
+                }
+                if(i == 4){
+                    System.out.println("Not enough calories");
+                }
+            }
+        }
     }
     /**
      * This method turns the clientNumber ArrayList into a String with the amount of clients
@@ -101,16 +120,16 @@ public class Hamper {
             }
         }
         if(adultMaleNum > 0){
-            list += (adultMaleNum + " Adult Male, ");
+            list += (adultMaleNum + " Adult Male");
         }
         if(adultFemaleNum > 0){
-            list += (adultFemaleNum + " Adult Female, ");
+            list += (", " + adultFemaleNum + " Adult Female");
         }
         if(childOver8Num > 0){
-            list += (childOver8Num + " Child Over 8, ");
+            list += (", " + childOver8Num + " Child Over 8");
         }
         if(childUnder8Num > 0){
-            list += (childUnder8Num + " Child Under 8");
+            list += (", " + childUnder8Num + " Child Under 8");
         }
         return list;
     }
