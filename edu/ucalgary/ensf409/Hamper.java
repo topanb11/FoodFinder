@@ -13,13 +13,13 @@ import java.util.ArrayList;
 public class Hamper {
     private ArrayList<Client> clientNumber;
     private static int hamperID;
-    private ArrayList<String> hamperFood;
+    private static ArrayList<String> hamperFood;
     /**
      * This is the constructor for the hamper
      */
     public Hamper(){
         this.clientNumber = new ArrayList<>();
-        this.hamperFood = new ArrayList<>();
+        hamperFood = new ArrayList<>();
     }
     /**
      * This method adds a client to the ArrayList clientNumber
@@ -29,17 +29,7 @@ public class Hamper {
         Client client = new Client(clientType);
         this.clientNumber.add(client);
     }
-    /**
-     * This method removes a client from a given index and throws an IllegalArgumentException when the index is
-     * greater than or equal to the size of the ArrayList
-     * @param clientID the index from which a client is removed from the ArrayList
-     */
-    public void removeClient(int clientID){
-        if(clientID >= this.clientNumber.size()){
-            throw new IllegalArgumentException("Index not in the ArrayList");
-        }
-        this.clientNumber.remove(clientID);
-    }
+
     /**
      * This method gets the ArrayList of clients
      * @return ArrayList<Client> this returns the ArrayList clientNumber;
@@ -139,7 +129,7 @@ public class Hamper {
      * This method turns the ArrayList hamperFood into a String with each of the foods listed
      * @return String this returns the food in the ArrayList as a String
      */
-    public String getFoodList(){
+    public static String getFoodList(){
         String list = "";
         for(String food : hamperFood){
             list += (food + "\n");

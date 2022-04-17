@@ -9,6 +9,7 @@ package edu.ucalgary.ensf409;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+import java.util.*;
 
 /**
  * Main window to create the hampers and orders
@@ -17,9 +18,11 @@ public class GUI implements ActionListener {
 
     public static JFrame frame = new JFrame("Order");
     private static int count = 0;
+    private static boolean orderValidity = false;
     private static JLabel numOfHamperLabel;
     private static JButton addButton;
     private static JButton genOrderButton;
+    private static ArrayList<GUIHamperPanel> hamperPanelArrayList = new ArrayList<>();
     public static void main(String[] args) {
         frame.getContentPane().setLayout(new FlowLayout());
         GUI buttonListener = new GUI();
@@ -58,17 +61,39 @@ public class GUI implements ActionListener {
      */
     @Override
     public void actionPerformed(ActionEvent e) {
-        // logic for when 'Add Hamper' button is pressed
+    // logic for when 'Add Hamper' button is pressed
         if (e.getSource() == addButton) {
             // make 'Generate Order' button visible
             genOrderButton.setVisible(true);
-            count++;
             // increment numOfHamperLabel
+            count++;
             numOfHamperLabel.setText("Number of Hampers: " + count);
 
             // add new Hamper JPanel
-            GUIHamperPanel hamperObj = new GUIHamperPanel();
+            GUIHamperPanel hamperObj = new GUIHamperPanel(count);
             frame.add(hamperObj.getHamperPanel());
+            hamperPanelArrayList.add(hamperObj);
+        }
+        if (e.getSource() == genOrderButton) {
+            if (hamperPanelArrayList.isEmpty()) {
+                orderValidity = false;
+            } else {
+                Order order = new Order();
+                for (GUIHamperPanel currentHamper : hamperPanelArrayList) {
+                    Hamper hamper = new Hamper();
+                    int j = 1;
+                    for (GUIClientPanel currentClientPanel : GUIHamperPanel.getClientPanelArrayList()) {
+                        if (currentClientPanel.getTextField() > 0) {
+                            for (int i = 1; i <= currentClientPanel.getTextField(); i++) {
+                                hamper.addClient(j);
+                            }
+                        }
+                        j++;
+                    }
+                    order.addToOrder(hamper);
+                }
+                order.printOrder();
+            }
         }
     }
 
@@ -79,15 +104,8 @@ public class GUI implements ActionListener {
         return frame;
     }
 
-    public static JButton getGenOrderButton() {
-        return genOrderButton;
-    }
-
-    /**
-     * @return - JLabel numOfHamperLabel
-     */
-    public static JLabel getNumOfHamperLabel() {
-        return numOfHamperLabel;
+    public ArrayList<GUIHamperPanel> getHamperArrayList() {
+        return hamperPanelArrayList;
     }
 
     /**
@@ -104,5 +122,16 @@ public class GUI implements ActionListener {
      */
     public static void decrementCount() {
         count--;
+    }
+
+    public static void changeHamperID(GUIHamperPanel hamper) {
+        hamperPanelArrayList.remove(hamper);
+        for (int i = 0; i < hamperPanelArrayList.size(); i++) {
+            hamperPanelArrayList.get(i).getHamperID().setText("Hamper #" + (i+1));
+        }
+    }
+
+    public static void updateHamperCount() {
+        numOfHamperLabel.setText("Number of Hampers:" + count);
     }
 }
