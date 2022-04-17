@@ -22,10 +22,16 @@ public class GUI implements ActionListener {
     private static JLabel numOfHamperLabel;
     private static JButton addButton;
     private static JButton genOrderButton;
+    private static JPanel hamperContainer;
     private static ArrayList<GUIHamperPanel> hamperPanelArrayList = new ArrayList<>();
     public static void main(String[] args) {
-        frame.getContentPane().setLayout(new FlowLayout());
         GUI buttonListener = new GUI();
+
+        hamperContainer = new JPanel();
+        hamperContainer.setLayout(new BoxLayout(hamperContainer, BoxLayout.Y_AXIS));
+
+        JScrollPane scroller = new JScrollPane(hamperContainer);
+        scroller.setPreferredSize(new Dimension(600,200));
 
         // button to add a new Hamper JPanel object
         addButton = new JButton("Add Hamper");
@@ -47,8 +53,9 @@ public class GUI implements ActionListener {
         
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(600,600);
-
+        frame.getContentPane().setLayout(new BorderLayout());
         frame.getContentPane().add(BorderLayout.NORTH, buttonPanel);
+        frame.add(scroller);
         frame.setVisible(true);
     }
 
@@ -71,7 +78,7 @@ public class GUI implements ActionListener {
 
             // add new Hamper JPanel
             GUIHamperPanel hamperObj = new GUIHamperPanel(count);
-            frame.add(hamperObj.getHamperPanel());
+            hamperContainer.add(hamperObj.getHamperPanel());
             hamperPanelArrayList.add(hamperObj);
         }
         if (e.getSource() == genOrderButton) {
@@ -93,6 +100,9 @@ public class GUI implements ActionListener {
                     order.addToOrder(hamper);
                 }
                 order.printOrder();
+                frame.getContentPane().invalidate();
+                frame.getContentPane().validate();
+                frame.getContentPane().repaint();
             }
         }
     }

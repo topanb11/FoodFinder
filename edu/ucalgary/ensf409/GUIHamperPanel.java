@@ -55,8 +55,6 @@ public class GUIHamperPanel extends Frame implements ActionListener{
         clientPanelArrayList.add(adultFemalePanel);
         clientPanelArrayList.add(childOver8Panel);
         clientPanelArrayList.add(childUnder8Panel);
-        // creating a JPanel where users can specify the number of the specific hamper
-        quantityOfHamperPanel = new GUIClientPanel("Quantity: ");
         
         // creating a 'Remove Hamper' JButton
         removeHamperButton = new JButton("Remove Hamper");
@@ -70,7 +68,6 @@ public class GUIHamperPanel extends Frame implements ActionListener{
         hamperPanel.add(adultFemalePanel.getClientPanel());
         hamperPanel.add(childOver8Panel.getClientPanel());
         hamperPanel.add(childUnder8Panel.getClientPanel());
-        hamperPanel.add(quantityOfHamperPanel.getClientPanel());
         hamperPanel.add(buttonPanel);
     }
     

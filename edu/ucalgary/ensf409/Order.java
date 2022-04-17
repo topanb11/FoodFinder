@@ -32,12 +32,10 @@ public class Order {
             writer.write("Group 2 Food Bank\nHamper Order Form\n\nName: Topan Budiman, Maxwell Couture, Mark Ngu, Jason Nguyen\n");
             writer.write("Date: " + LocalDate.now() + "\n\n");
             writer.write("Original Request\n");
-            for (int i = 0; i < hamperItems.size(); i++) {
-                
-            }
-            for (int i = 0; i < hamperItems.size(); i++) {
-                writer.write(Hamper.getFoodList());
-            }
+            // for (Hamper currentHamper : hamperItems) {
+            //     writer.write("Hamper " + currentHamper. + "Items:\n");
+            //     writer.write(hamperItems);
+            // }
             writer.close();
         } catch (IOException e) {}
     }
