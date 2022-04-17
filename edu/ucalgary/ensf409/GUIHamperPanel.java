@@ -80,12 +80,13 @@ public class GUIHamperPanel extends Frame implements ActionListener{
     @Override
     public void actionPerformed(ActionEvent e) {
     // logic for when 'Remove Hamper' button is pressed
-        GUI.getMainFrame().getContentPane().remove(hamperPanel);
+        GUI.getHamperContainer().remove(hamperPanel);
         GUI.decrementCount();
         GUI.updateHamperCount();
         GUI.changeHamperID(this);
-        GUI.getMainFrame().revalidate();
-        GUI.getMainFrame().repaint();
+        GUI.getHamperArrayList().remove(this);
+        GUI.getHamperContainer().revalidate();
+        GUI.getHamperContainer().repaint();
     }
 
     public JPanel getHamperPanel() {

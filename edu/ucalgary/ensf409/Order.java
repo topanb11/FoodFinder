@@ -27,15 +27,17 @@ public class Order {
     // iterate through ArrayList<Food>hamperFood 
     // all food is already formatted 
     public void printOrder() {
+        int hamperID = 1;
         try {
             FileWriter writer = new FileWriter("Order.txt");
             writer.write("Group 2 Food Bank\nHamper Order Form\n\nName: Topan Budiman, Maxwell Couture, Mark Ngu, Jason Nguyen\n");
             writer.write("Date: " + LocalDate.now() + "\n\n");
             writer.write("Original Request\n");
-            // for (Hamper currentHamper : hamperItems) {
-            //     writer.write("Hamper " + currentHamper. + "Items:\n");
-            //     writer.write(hamperItems);
-            // }
+             for (Hamper currentHamper : hamperItems) {
+                 writer.write("Hamper " + hamperID + " Items:\n");
+                 writer.write("sexmachine");
+                 hamperID++;
+             }
             writer.close();
         } catch (IOException e) {}
     }
