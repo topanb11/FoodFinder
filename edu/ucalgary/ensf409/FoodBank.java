@@ -68,8 +68,8 @@ public class FoodBank extends SQL {
                     foodMacro = tmpItem.getCalories();
                     break;
             }
-            double currDiff = Math.abs(targetMacro - foodMacro);
-            if(currDiff < prevDiff + 100){
+            double currDiff = targetMacro - foodMacro;
+            if(currDiff < prevDiff && currDiff > 0){
                 prevDiff = currDiff;
                 ID = tmpItem.getID();
             }
@@ -94,7 +94,12 @@ public class FoodBank extends SQL {
         if(currMacro > targetMacro){
             return foodCart;
         } else {
-            int ID = searchFood(targetMacro - currMacro, index);
+            int ID = 0;
+            if(Math.abs(targetMacro - currMacro) >= 50) {
+                ID = searchFood(targetMacro - currMacro, index);
+            } else {
+                ID = searchFood((targetMacro - currMacro) + 25, index);
+            }
             Food tmpFood = getFood(ID);
             String line = String.format("%s\t\t%s", tmpFood.getID(), tmpFood.getFoodName());
             deleteFromDB(tmpFood.getFoodName());

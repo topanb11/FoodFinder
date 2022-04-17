@@ -90,7 +90,7 @@ public class GUI implements ActionListener {
                     Hamper hamper = new Hamper();
                     int j = 1;
                     for (GUIClientPanel currentClientPanel : GUIHamperPanel.getClientPanelArrayList()) {
-                        if (currentClientPanel.getTextField() > 0) {
+                        if (currentClientPanel.getTextField() >= 0) {
                             for (int i = 1; i <= currentClientPanel.getTextField(); i++) {
                                 hamper.addClient(j);
                             }
