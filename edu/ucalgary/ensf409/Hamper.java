@@ -13,11 +13,11 @@ import java.util.ArrayList;
 public class Hamper {
     private ArrayList<Client> clientNumber;
     private static int hamperID;
-    private static ArrayList<String> hamperFood;
+    private ArrayList<String> hamperFood;
     /**
      * This is the constructor for the hamper
      */
-    public Hamper(){
+    public Hamper() {
         this.clientNumber = new ArrayList<>();
         hamperFood = new ArrayList<>();
     }
@@ -129,7 +129,7 @@ public class Hamper {
      * This method turns the ArrayList hamperFood into a String with each of the foods listed
      * @return String this returns the food in the ArrayList as a String
      */
-    public static String getFoodList(){
+    public String getFoodList(){
         String list = "";
         for(String food : hamperFood){
             list += (food + "\n");

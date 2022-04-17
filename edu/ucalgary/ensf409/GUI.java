@@ -114,7 +114,15 @@ public class GUI implements ActionListener {
         return frame;
     }
 
-    public ArrayList<GUIHamperPanel> getHamperArrayList() {
+    /**
+     *
+     * @return - hamperContainer
+     */
+    public static JPanel getHamperContainer() {
+        return hamperContainer;
+    }
+
+    public static ArrayList<GUIHamperPanel> getHamperArrayList() {
         return hamperPanelArrayList;
     }
 
