@@ -33,9 +33,16 @@ public class Order {
             writer.write("Group 2 Food Bank\nHamper Order Form\n\nName: Topan Budiman, Maxwell Couture, Mark Ngu, Jason Nguyen\n");
             writer.write("Date: " + LocalDate.now() + "\n\n");
             writer.write("Original Request\n");
+            for(Hamper currentHamper: hamperItems) {
+                writer.write("Hamper " + hamperID + ": " + currentHamper.getClientList() +"\n");
+                hamperID++;
+            }
+            hamperID = 1;
              for (Hamper currentHamper : hamperItems) {
                  writer.write("Hamper " + hamperID + " Items:\n");
-                 writer.write("sexmachine");
+                 currentHamper.calculateNut();
+                 currentHamper.fillHamper();
+                 writer.write(currentHamper.getFoodList());
                  hamperID++;
              }
             writer.close();

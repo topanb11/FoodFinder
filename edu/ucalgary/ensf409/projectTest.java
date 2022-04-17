@@ -139,7 +139,7 @@ public class projectTest {
             e.printStackTrace();
         }
         int foundID = testBank.searchFood(635, 0);
-        int expectedID = 168;
+        int expectedID = 88;
         assertEquals("Method searchFood did not return the expected result: ", expectedID, foundID);
     }
 
@@ -179,19 +179,18 @@ public class projectTest {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        double[] nutNeeds = {10332, 17136, 12772, 13230, 56700};
-        double[] expectedMacros = {15098.1, 17715.32, 12792.38, 13293.6, 58780};
+        double[] nutNeeds = {6356, 10388, 9716, 7140, 33600};
         double[] actualMacros = {0, 0, 0, 0 ,0};
 
         for(int i = 0; i < nutNeeds.length; i++) {
             testBank.fillFood(actualMacros[i], nutNeeds[i], actualMacros, i);
         }
 
-        assertEquals("Method fillFood did not fill grain content as expected result: ",15098.1, actualMacros[0], 0.05);
-        assertEquals("Method fillFood did not fill fruit & veggie content as expected result: ",17715.32, actualMacros[1] , 0.05);
-        assertEquals("Method fillFood did not fill protein content as expected result: ",12792.38, actualMacros[2], 0.05);
-        assertEquals("Method fillFood did not fill other content as expected result: ",13293.6, actualMacros[3], 0.05);
-        assertEquals("Method fillFood did not fill protein content as expected result: ",58780, actualMacros[4], 0.05);
+        assertEquals("Method fillFood did not fill grain content as expected result: ",8737, actualMacros[0], 0.05);
+        assertEquals("Method fillFood did not fill fruit & veggie content as expected result: ",11650.34, actualMacros[1] , 0.05);
+        assertEquals("Method fillFood did not fill protein content as expected result: ",10172.66, actualMacros[2], 0.05);
+        assertEquals("Method fillFood did not fill other content as expected result: ",7161, actualMacros[3], 0.05);
+        assertEquals("Method fillFood did not fill protein content as expected result: ",37721, actualMacros[4], 0.05);
     }
 
     /**
@@ -223,25 +222,26 @@ public class projectTest {
         assertEquals("Method deleteFromDB did not delete from the database:", expected, actual);
     }
 
-    @Test
-    public void testAddToOrder() {
-        Hamper testHamper = new Hamper();
-        Order testOrder = new Order();
-        testOrder.addToOrder(testHamper);
-        String foundOrder = testOrder.printOrder();
-        String expectedOrder = "some order w hamper items";
+//    @Test
+//    public void testAddToOrder() {
+//        Hamper testHamper = new Hamper();
+//        Order testOrder = new Order();
+//        testOrder.addToOrder(testHamper);
+//        String foundOrder = testOrder.printOrder();
+//        String expectedOrder = "some order w hamper items";
+//
+//        assertEquals("Method addToOrder did not return the expected result: ",expectedOrder, foundOrder);
+//    }
 
-        assertEquals("Method addToOrder did not return the expected result: ",expectedOrder, foundOrder);
-    }
-    @Test
-    public void testPrintOrder() {
-        Hamper testHamper = new Hamper();
-        Order testOrder = new Order();
-        String foundOrder = testOrder.printOrder();
-        String expectedOrder = "some order";
-
-        assertEquals("Method printOrder did not return the expected result: ",expectedOrder, foundOrder);
-    }
+//    @Test
+//    public void testPrintOrder() {
+//        Hamper testHamper = new Hamper();
+//        Order testOrder = new Order();
+//        String foundOrder = testOrder.printOrder();
+//        String expectedOrder = "some order";
+//
+//        assertEquals("Method printOrder did not return the expected result: ",expectedOrder, foundOrder);
+//    }
 
     /**
      * Creates a client object and checks to see if the object is null. It then checks if the returned client object
