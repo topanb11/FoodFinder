@@ -60,8 +60,6 @@ public class Hamper {
         bank.storeFood();
         double[] expected = calculateNut();
         double[] actual = {0, 0, 0, 0, 0};
-        bank.initializeConnection();
-        bank.storeFood();
         for(int i = 0; i < actual.length; i++){
             hamperFood = bank.fillFood(actual[i], expected[i], actual, i);
         }
