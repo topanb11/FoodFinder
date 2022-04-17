@@ -7,6 +7,9 @@
 
 package edu.ucalgary.ensf409;
 
+import java.io.FileWriter;
+import java.io.IOException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class Order {
@@ -18,9 +21,24 @@ public class Order {
     }
 
     public void addToOrder(Hamper hamper) throws IllegalArgumentException{
+        hamperItems.add(hamper);
     }
-
-    public String printOrder() {
-        return null;
+    
+    // iterate through ArrayList<Food>hamperFood 
+    // all food is already formatted 
+    public void printOrder() {
+        try {
+            FileWriter writer = new FileWriter("Order.txt");
+            writer.write("Group 2 Food Bank\nHamper Order Form\n\nName: Topan Budiman, Maxwell Couture, Mark Ngu, Jason Nguyen\n");
+            writer.write("Date: " + LocalDate.now() + "\n\n");
+            writer.write("Original Request\n");
+            for (int i = 0; i < hamperItems.size(); i++) {
+                
+            }
+            for (int i = 0; i < hamperItems.size(); i++) {
+                writer.write(Hamper.getFoodList());
+            }
+            writer.close();
+        } catch (IOException e) {}
     }
 }

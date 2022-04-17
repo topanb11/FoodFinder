@@ -8,6 +8,8 @@ package edu.ucalgary.ensf409;
 
 import java.awt.*;
 import java.awt.event.*;
+import java.util.ArrayList;
+
 import javax.swing.*;
 
 /**
@@ -17,40 +19,59 @@ import javax.swing.*;
  * Contains 'Remove Hamper' button to get rid of the hampers that users do not need.
  */
 
+ /**
+  * to do: 
+        - add hamperID that changes with every new hamper
+  */
 public class GUIHamperPanel extends Frame implements ActionListener{
 
+    private JLabel hamperID;
     private JPanel hamperPanel = new JPanel();
     private static JButton removeHamperButton;
+    private static GUIClientPanel adultMalePanel;
+    private static GUIClientPanel adultFemalePanel;
+    private static GUIClientPanel childOver8Panel;
+    private static GUIClientPanel childUnder8Panel;
+    private static GUIClientPanel quantityOfHamperPanel;
+    private static ArrayList<GUIClientPanel> clientPanelArrayList = new ArrayList<>();
 
     // Constructor
-    public GUIHamperPanel() {
+    public GUIHamperPanel(int hamperCount) {
         // formatting 
         hamperPanel = new JPanel(new BoxLayout(hamperPanel, BoxLayout.Y_AXIS));
-        hamperPanel.setLayout(new GridLayout(5,1));
-        hamperPanel.setBorder(BorderFactory.createLineBorder(Color.orange));
+        hamperPanel.setLayout(new GridLayout(7,1));
+        hamperPanel.setBorder(BorderFactory.createLineBorder(Color.black));
+
+        // hamper ID number
+        hamperID = new JLabel("Hamper #" + hamperCount);
 
         // creating a GUIClientPanel for each client type
-        GUIClientPanel adultMalePanel = new GUIClientPanel("Number of Adult Males: ");
-        GUIClientPanel adultFemalePanel = new GUIClientPanel("Number of Adult Females: ");
-        GUIClientPanel childOver8Panel = new GUIClientPanel("Number of Children Under 8: ");
-        GUIClientPanel childUnder8Panel = new GUIClientPanel("Number of Children Over 8: ");
+        adultMalePanel = new GUIClientPanel("Number of Adult Males: ");
+        adultFemalePanel = new GUIClientPanel("Number of Adult Females: ");
+        childOver8Panel = new GUIClientPanel("Number of Children Under 8: ");
+        childUnder8Panel = new GUIClientPanel("Number of Children Over 8: ");
 
+        clientPanelArrayList.add(adultMalePanel);
+        clientPanelArrayList.add(adultFemalePanel);
+        clientPanelArrayList.add(childOver8Panel);
+        clientPanelArrayList.add(childUnder8Panel);
+        // creating a JPanel where users can specify the number of the specific hamper
+        quantityOfHamperPanel = new GUIClientPanel("Quantity: ");
+        
         // creating a 'Remove Hamper' JButton
         removeHamperButton = new JButton("Remove Hamper");
         removeHamperButton.addActionListener(this);
         JPanel buttonPanel = new JPanel();
         buttonPanel.add(removeHamperButton);
 
-        // add all the sub-panels to main Hamper Panel
+        // add all the components to main Hamper Panel
+        hamperPanel.add(hamperID);
         hamperPanel.add(adultMalePanel.getClientPanel());
         hamperPanel.add(adultFemalePanel.getClientPanel());
         hamperPanel.add(childOver8Panel.getClientPanel());
         hamperPanel.add(childUnder8Panel.getClientPanel());
+        hamperPanel.add(quantityOfHamperPanel.getClientPanel());
         hamperPanel.add(buttonPanel);
-    }
-
-    public JPanel getHamperPanel() {
-        return this.hamperPanel;
     }
     
     /**
@@ -62,15 +83,40 @@ public class GUIHamperPanel extends Frame implements ActionListener{
     @Override
     public void actionPerformed(ActionEvent e) {
     // logic for when 'Remove Hamper' button is pressed
-        // decrement current number of hampers - retrieved from GUI.java
-        GUI.decrementCount();
-        // removes the hamper
         GUI.getMainFrame().getContentPane().remove(hamperPanel);
-        // sets numOfHamperLabel from GUI.java to new decremented value
-        GUI.getNumOfHamperLabel().setText("Number of Hampers: " + GUI.getCount());
-        // mandatory revalidation of main window
+        GUI.decrementCount();
+        GUI.updateHamperCount();
+        GUI.changeHamperID(this);
         GUI.getMainFrame().revalidate();
         GUI.getMainFrame().repaint();
+    }
+
+    public JPanel getHamperPanel() {
+        return this.hamperPanel;
+    }
+
+    public JLabel getHamperID() {
+        return hamperID;
+    }
+
+    public GUIClientPanel getAdultMalePanel() {
+        return adultMalePanel;
+    }
+
+    public GUIClientPanel getAdultFemalePanel() {
+        return adultFemalePanel;
+    }
+
+    public GUIClientPanel getChildOver8Panel() {
+        return childOver8Panel;
+    }
+    
+    public GUIClientPanel getChildUnder8Panel() {
+        return childUnder8Panel;
+    }
+
+    public static ArrayList<GUIClientPanel> getClientPanelArrayList() {
+        return clientPanelArrayList;
     }
 }
 
@@ -83,6 +129,7 @@ public class GUIHamperPanel extends Frame implements ActionListener{
  */
 class GUIClientPanel extends JPanel {
     private JPanel clientPanel;
+    private JTextField textField;
     
     /**
      * Constructor for GUIClientPanel
@@ -95,10 +142,17 @@ class GUIClientPanel extends JPanel {
         clientPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
         
         JLabel clientLabel = new JLabel(labelName);
-        JTextField textField = new JTextField(1);
+        textField = new JTextField(2);
         
         clientPanel.add(clientLabel);
         clientPanel.add(textField);
+    }
+
+    /**
+     * @return User input into client textField
+     */
+    public int getTextField() {
+        return Integer.valueOf(textField.getText());
     }
 
     /**
