@@ -15,14 +15,11 @@ import javax.swing.*;
 /**
  * GUIHamperPanel class - Extends Frame, Implements ActionListener
  * Is a JPanel meant to represent a new hamper
+ * Contains a hamperID that changes dynamically when removing and adding hampers
  * Contains sub-JPanels containing text boxes for entering number of specific clients
  * Contains 'Remove Hamper' button to get rid of the hampers that users do not need.
  */
 
- /**
-  * to do: 
-        - add hamperID that changes with every new hamper
-  */
 public class GUIHamperPanel extends Frame implements ActionListener{
 
     private JLabel hamperID;
@@ -32,7 +29,6 @@ public class GUIHamperPanel extends Frame implements ActionListener{
     private static GUIClientPanel adultFemalePanel;
     private static GUIClientPanel childOver8Panel;
     private static GUIClientPanel childUnder8Panel;
-    private static GUIClientPanel quantityOfHamperPanel;
     private static ArrayList<GUIClientPanel> clientPanelArrayList = new ArrayList<>();
 
     // Constructor
@@ -51,6 +47,7 @@ public class GUIHamperPanel extends Frame implements ActionListener{
         childOver8Panel = new GUIClientPanel("Number of Children Under 8: ");
         childUnder8Panel = new GUIClientPanel("Number of Children Over 8: ");
 
+        // ArrayList of GUIClientPanels
         clientPanelArrayList.add(adultMalePanel);
         clientPanelArrayList.add(adultFemalePanel);
         clientPanelArrayList.add(childOver8Panel);
@@ -89,30 +86,45 @@ public class GUIHamperPanel extends Frame implements ActionListener{
         GUI.getHamperContainer().repaint();
     }
 
+    /**
+     * @return - JPanel hamperPanel
+     */
     public JPanel getHamperPanel() {
         return this.hamperPanel;
     }
-
+    /**
+     * @return - JLabel hamperID
+     */
     public JLabel getHamperID() {
         return hamperID;
     }
-
+    /**
+     * @return - GUIClientPanel adultMalePanel 
+     */
     public GUIClientPanel getAdultMalePanel() {
         return adultMalePanel;
     }
-
+    /**
+     * @return - GUIClientPanel adultFemalePanel 
+     */
     public GUIClientPanel getAdultFemalePanel() {
         return adultFemalePanel;
     }
-
+    /**
+     * @return - GUIClientPanel childOver8Panel 
+     */
     public GUIClientPanel getChildOver8Panel() {
         return childOver8Panel;
     }
-    
+    /**
+     * @return - GUIClientPanel childUnder8Panel 
+     */
     public GUIClientPanel getChildUnder8Panel() {
         return childUnder8Panel;
     }
-
+    /**
+     * @return - ArrayList<GUIClienePanel> clientPanelArrayList
+     */
     public static ArrayList<GUIClientPanel> getClientPanelArrayList() {
         return clientPanelArrayList;
     }
@@ -125,7 +137,7 @@ public class GUIHamperPanel extends Frame implements ActionListener{
  *      - a JLabel denoting which client type it is
  *      - a JTextField for users to enter in the number of the client type
  */
-class GUIClientPanel extends JPanel {
+class GUIClientPanel extends JPanel implements FocusListener{
     private JPanel clientPanel;
     private JTextField textField;
     
@@ -140,8 +152,24 @@ class GUIClientPanel extends JPanel {
         clientPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
         
         JLabel clientLabel = new JLabel(labelName);
-        textField = new JTextField(2);
-        
+        // textField has default text of "0"
+        textField = new JTextField("0",2);
+        // focus listener for when users click on JTextField
+        textField.addFocusListener(new FocusListener() {
+            // textField set to blank when focused
+            public void focusGained(FocusEvent e) {
+                textField.setText("");
+            }
+            // if textField isn't changed before losing focus setText to "0"
+            // otherwise nothing
+            public void focusLost(FocusEvent e) {
+                if (textField.getText().isEmpty()) {
+                    textField.setText("0");
+                } else {
+                    // nothing
+                }
+            }
+        });
         clientPanel.add(clientLabel);
         clientPanel.add(textField);
     }
@@ -158,5 +186,26 @@ class GUIClientPanel extends JPanel {
      */
     public JPanel getClientPanel() {
         return this.clientPanel;
+    }
+
+    /**
+     * textField set to blank when focused
+     */
+    @Override
+    public void focusGained(FocusEvent e) {
+        textField.setText("");
+    }
+
+    /**
+     * if textField isn't changed before losing focus setText to "0"
+     * otherwise nothing
+     */
+    @Override
+    public void focusLost(FocusEvent e) {
+        if (textField.getText().isEmpty()) {
+            textField.setText("0");
+        } else {
+            // nothing
+        }
     }
 }

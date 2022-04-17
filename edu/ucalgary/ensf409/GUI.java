@@ -27,9 +27,9 @@ public class GUI implements ActionListener {
     public static void main(String[] args) {
         GUI buttonListener = new GUI();
 
+        // Panel consisting of GUIHamperPanels
         hamperContainer = new JPanel();
         hamperContainer.setLayout(new BoxLayout(hamperContainer, BoxLayout.Y_AXIS));
-
         JScrollPane scroller = new JScrollPane(hamperContainer);
         scroller.setPreferredSize(new Dimension(600,200));
 
@@ -43,6 +43,7 @@ public class GUI implements ActionListener {
         genOrderButton = new JButton("Generate Order");
         genOrderButton.addActionListener(buttonListener);
 
+        // Panel consisting of buttons
         JPanel buttonPanel = new JPanel();
         buttonPanel.setLayout(new GridLayout(2,2));
         buttonPanel.add(addButton);
@@ -68,6 +69,7 @@ public class GUI implements ActionListener {
      */
     @Override
     public void actionPerformed(ActionEvent e) {
+        int click = 0;
     // logic for when 'Add Hamper' button is pressed
         if (e.getSource() == addButton) {
             // make 'Generate Order' button visible
@@ -81,11 +83,13 @@ public class GUI implements ActionListener {
             hamperContainer.add(hamperObj.getHamperPanel());
             hamperPanelArrayList.add(hamperObj);
         }
+    // logic for when 'Generate Order' button is pressed
         if (e.getSource() == genOrderButton) {
+            click++;
+            Order order = new Order(click);
             if (hamperPanelArrayList.isEmpty()) {
                 orderValidity = false;
             } else {
-                Order order = new Order();
                 for (GUIHamperPanel currentHamper : hamperPanelArrayList) {
                     Hamper hamper = new Hamper();
                     int j = 1;
@@ -94,19 +98,33 @@ public class GUI implements ActionListener {
                             for (int i = 1; i <= currentClientPanel.getTextField(); i++) {
                                 hamper.addClient(j);
                             }
+                            orderValidity = true;
+                        } else {
+                            orderValidity = false;
+                            break;
                         }
                         j++;
                     }
                     order.addToOrder(hamper);
                 }
+            }
+            if (!orderValidity) {
+                JOptionPane.showMessageDialog(frame, "Ensure that the order is valid\n(i.e. At least one hamper exists, and values entered are positive integers or 0)", "Order Invalid", JOptionPane.ERROR_MESSAGE);
+            } else {
                 order.printOrder();
                 frame.getContentPane().invalidate();
                 frame.getContentPane().validate();
                 frame.getContentPane().repaint();
-            }
+            }   
         }
     }
 
+    /**
+     * @return - boolean orderValidity
+     */
+    public static boolean getOrderValidity() {
+        return orderValidity;
+    }
     /**
      * @return - JFrame frame, main window object
      */
@@ -115,21 +133,21 @@ public class GUI implements ActionListener {
     }
 
     /**
-     *
-     * @return - hamperContainer
+     * @return - JPanel hamperContainer, panel consisting of GUIHamperPanels
      */
     public static JPanel getHamperContainer() {
         return hamperContainer;
     }
 
+    /**
+     * @return - ArrayList<GUIHamperPanel> hamperPanelArrayList
+     */
     public static ArrayList<GUIHamperPanel> getHamperArrayList() {
         return hamperPanelArrayList;
     }
 
     /**
-     * Gets the count of hamper so that GUIHamperPanel can adjust
-     * when hampers are removed
-     * @return - int count
+     * @return - int count, number of hampers
      */
     public static int getCount() {
         return count;
@@ -142,6 +160,11 @@ public class GUI implements ActionListener {
         count--;
     }
 
+    /**
+     * Removes the specified hamper from hamperPanelArrayList
+     * Iterates through hamperPanelArrayList to set hamperID to correct number
+     * @param hamper - hamper to be removed
+     */
     public static void changeHamperID(GUIHamperPanel hamper) {
         hamperPanelArrayList.remove(hamper);
         for (int i = 0; i < hamperPanelArrayList.size(); i++) {
@@ -149,6 +172,9 @@ public class GUI implements ActionListener {
         }
     }
 
+    /**
+     * Updates numOfHamperLabel
+     */
     public static void updateHamperCount() {
         numOfHamperLabel.setText("Number of Hampers:" + count);
     }

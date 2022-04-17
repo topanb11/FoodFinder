@@ -10,12 +10,12 @@ package edu.ucalgary.ensf409;
 import java.sql.SQLException;
 import java.util.*;
 import org.junit.*;
-import org.testng.annotations.Test;
+import org.testing.annotations.Test;
 import static org.junit.Assert.*;
 
-public class projectTest {
+public class TestProject {
 
-    public projectTest(){
+    public TestProject(){
 
     }
 
@@ -25,8 +25,19 @@ public class projectTest {
      */
     @Test
     public void testOrderConstructor() {
-        Order testOrder = new Order();
-        assertNotNull("The order constructor did not create an object: ", testOrder);
+        int expectedID = 1;
+        Order testOrder = new Order(expectedID);
+        int actualID = testOrder.getOrderNumber();
+        assertEquals("Order has incorrect ID", expectedID, actualID);
+        assertNotNull("Order constructor did not create and object: ", testOrder);
+    }
+
+    @Test
+    public void testAddToOrder() {
+        Order testOrder = new Order(1);
+        Hamper testHamper = new Hamper();
+        testOrder.addToOrder(testHamper);
+        assertNotNull("addToOrder() did not add the hamper to the order: ", testOrder);
     }
 
     /**
@@ -356,4 +367,7 @@ public class projectTest {
         assertEquals("The getter for other returns an incorrect double: ", expectedOther, foundOther);
         assertEquals("The getter for calories returns an incorrect double: ", expectedCalories, foundCalories);
     }
+
+    @Test
+    public void 
 }

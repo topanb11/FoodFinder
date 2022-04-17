@@ -16,12 +16,16 @@ public class Order {
     private final int ORDERNUMBER;
     private ArrayList<Hamper> hamperItems = new ArrayList<Hamper>();
 
-    public Order() {
-        this.ORDERNUMBER = 69;
+    public Order(int ORDERNUMBER) {
+        this.ORDERNUMBER = ORDERNUMBER;
     }
 
     public void addToOrder(Hamper hamper) throws IllegalArgumentException{
         hamperItems.add(hamper);
+    }
+
+    public int getOrderNumber() {
+        return this.ORDERNUMBER;
     }
     
     // iterate through ArrayList<Food>hamperFood 
@@ -29,7 +33,7 @@ public class Order {
     public void printOrder() {
         int hamperID = 1;
         try {
-            FileWriter writer = new FileWriter("Order.txt");
+            FileWriter writer = new FileWriter("Order" + ORDERNUMBER + ".txt");
             writer.write("Group 2 Food Bank\nHamper Order Form\n\nName: Topan Budiman, Maxwell Couture, Mark Ngu, Jason Nguyen\n");
             writer.write("Date: " + LocalDate.now() + "\n\n");
             writer.write("Original Request\n");
