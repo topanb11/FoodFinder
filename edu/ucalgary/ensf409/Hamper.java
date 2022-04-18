@@ -131,16 +131,16 @@ public class Hamper {
             }
         }
         if(adultMaleNum > 0){
-            list += (adultMaleNum + " Adult Male");
+            list += (adultMaleNum + " Adult Male ");
         }
         if(adultFemaleNum > 0){
-            list += (", " + adultFemaleNum + " Adult Female");
+            list += (adultFemaleNum + " Adult Female ");
         }
         if(childOver8Num > 0){
-            list += (", " + childOver8Num + " Child Over 8");
+            list += (childOver8Num + "Child Over 8 ");
         }
         if(childUnder8Num > 0){
-            list += (", " + childUnder8Num + " Child Under 8");
+            list += (childUnder8Num + "Child Under 8 ");
         }
         return list;
     }
