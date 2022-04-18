@@ -13,11 +13,10 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class Order {
-    private final int ORDERNUMBER;
+    private final int ORDERNUMBER = 0;
     private ArrayList<Hamper> hamperItems = new ArrayList<Hamper>();
 
-    public Order(int ORDERNUMBER) {
-        this.ORDERNUMBER = ORDERNUMBER;
+    public Order() {
     }
 
     public void addToOrder(Hamper hamper) throws IllegalArgumentException{
@@ -27,23 +26,27 @@ public class Order {
     public int getOrderNumber() {
         return this.ORDERNUMBER;
     }
+
+    public ArrayList<Hamper> getHamperItems() {
+        return this.hamperItems;
+    }
     
     // iterate through ArrayList<Food>hamperFood 
     // all food is already formatted 
     public void printOrder() {
         int hamperID = 1;
         try {
-            FileWriter writer = new FileWriter("Order" + ORDERNUMBER + ".txt");
-            writer.write("Group 2 Food Bank\nHamper Order Form\n\nName: Topan Budiman, Maxwell Couture, Mark Ngu, Jason Nguyen\n");
-            writer.write("Date: " + LocalDate.now() + "\n\n");
+            FileWriter writer = new FileWriter("Order" + GUI.getClick() + ".txt");
+            writer.write("Group 2 Food Bank\nHamper Order Form\n\nName: \n");
+            writer.write("Date: \n\n");
             writer.write("Original Request\n");
-            for(Hamper currentHamper: hamperItems) {
+            for(Hamper currentHamper : hamperItems) {
                 writer.write("Hamper " + hamperID + ": " + currentHamper.getClientList() +"\n");
                 hamperID++;
             }
             hamperID = 1;
              for (Hamper currentHamper : hamperItems) {
-                 writer.write("Hamper " + hamperID + " Items:\n");
+                 writer.write("\nHamper " + hamperID + " Items:\n");
                  currentHamper.calculateNut();
                  currentHamper.fillHamper();
                  writer.write(currentHamper.getFoodList());

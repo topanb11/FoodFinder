@@ -20,20 +20,15 @@ import javax.swing.*;
  * Contains 'Remove Hamper' button to get rid of the hampers that users do not need.
  */
 
-public class GUIHamperPanel extends Frame implements ActionListener{
+public class GUIHamperPanel extends Frame {
 
     private JLabel hamperID;
     private JPanel hamperPanel = new JPanel();
-    private static JButton removeHamperButton;
-    private static GUIClientPanel adultMalePanel;
-    private static GUIClientPanel adultFemalePanel;
-    private static GUIClientPanel childOver8Panel;
-    private static GUIClientPanel childUnder8Panel;
-    private static ArrayList<GUIClientPanel> clientPanelArrayList = new ArrayList<>();
+    private static ArrayList<GUIClientPanel> clientPanelArrayList;
 
     // Constructor
     public GUIHamperPanel(int hamperCount) {
-        // formatting 
+        // formatting
         hamperPanel = new JPanel(new BoxLayout(hamperPanel, BoxLayout.Y_AXIS));
         hamperPanel.setLayout(new GridLayout(7,1));
         hamperPanel.setBorder(BorderFactory.createLineBorder(Color.black));
@@ -42,22 +37,17 @@ public class GUIHamperPanel extends Frame implements ActionListener{
         hamperID = new JLabel("Hamper #" + hamperCount);
 
         // creating a GUIClientPanel for each client type
-        adultMalePanel = new GUIClientPanel("Number of Adult Males: ");
-        adultFemalePanel = new GUIClientPanel("Number of Adult Females: ");
-        childOver8Panel = new GUIClientPanel("Number of Children Under 8: ");
-        childUnder8Panel = new GUIClientPanel("Number of Children Over 8: ");
+        GUIClientPanel adultMalePanel = new GUIClientPanel("Number of Adult Males: ");
+        GUIClientPanel adultFemalePanel = new GUIClientPanel("Number of Adult Females: ");
+        GUIClientPanel childOver8Panel = new GUIClientPanel("Number of Children Over 8: ");
+        GUIClientPanel childUnder8Panel = new GUIClientPanel("Number of Children Under 8: ");
 
         // ArrayList of GUIClientPanels
+        clientPanelArrayList = new ArrayList<>();
         clientPanelArrayList.add(adultMalePanel);
         clientPanelArrayList.add(adultFemalePanel);
         clientPanelArrayList.add(childOver8Panel);
         clientPanelArrayList.add(childUnder8Panel);
-        
-        // creating a 'Remove Hamper' JButton
-        removeHamperButton = new JButton("Remove Hamper");
-        removeHamperButton.addActionListener(this);
-        JPanel buttonPanel = new JPanel();
-        buttonPanel.add(removeHamperButton);
 
         // add all the components to main Hamper Panel
         hamperPanel.add(hamperID);
@@ -65,25 +55,6 @@ public class GUIHamperPanel extends Frame implements ActionListener{
         hamperPanel.add(adultFemalePanel.getClientPanel());
         hamperPanel.add(childOver8Panel.getClientPanel());
         hamperPanel.add(childUnder8Panel.getClientPanel());
-        hamperPanel.add(buttonPanel);
-    }
-    
-    /**
-     * This method responds to actions performed in the GUI, such 
-     * as the pressing of buttons.
-     * @param e - Pressing button actions
-     * 'Remove Hamper' button - part of GUIHamperPanel JPanel object
-     */
-    @Override
-    public void actionPerformed(ActionEvent e) {
-    // logic for when 'Remove Hamper' button is pressed
-        GUI.getHamperContainer().remove(hamperPanel);
-        GUI.decrementCount();
-        GUI.updateHamperCount();
-        GUI.changeHamperID(this);
-        GUI.getHamperArrayList().remove(this);
-        GUI.getHamperContainer().revalidate();
-        GUI.getHamperContainer().repaint();
     }
 
     /**
@@ -92,38 +63,9 @@ public class GUIHamperPanel extends Frame implements ActionListener{
     public JPanel getHamperPanel() {
         return this.hamperPanel;
     }
+
     /**
-     * @return - JLabel hamperID
-     */
-    public JLabel getHamperID() {
-        return hamperID;
-    }
-    /**
-     * @return - GUIClientPanel adultMalePanel 
-     */
-    public GUIClientPanel getAdultMalePanel() {
-        return adultMalePanel;
-    }
-    /**
-     * @return - GUIClientPanel adultFemalePanel 
-     */
-    public GUIClientPanel getAdultFemalePanel() {
-        return adultFemalePanel;
-    }
-    /**
-     * @return - GUIClientPanel childOver8Panel 
-     */
-    public GUIClientPanel getChildOver8Panel() {
-        return childOver8Panel;
-    }
-    /**
-     * @return - GUIClientPanel childUnder8Panel 
-     */
-    public GUIClientPanel getChildUnder8Panel() {
-        return childUnder8Panel;
-    }
-    /**
-     * @return - ArrayList<GUIClienePanel> clientPanelArrayList
+     * @return - ArrayList<GUIClientPanel> clientPanelArrayList
      */
     public static ArrayList<GUIClientPanel> getClientPanelArrayList() {
         return clientPanelArrayList;
@@ -178,7 +120,7 @@ class GUIClientPanel extends JPanel implements FocusListener{
      * @return User input into client textField
      */
     public int getTextField() {
-        return Integer.valueOf(textField.getText());
+        return Integer.parseInt(textField.getText());
     }
 
     /**
