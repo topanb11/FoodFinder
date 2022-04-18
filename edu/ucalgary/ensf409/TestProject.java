@@ -324,7 +324,7 @@ public class TestProject {
         Hamper testHamper = new Hamper();
         testHamper.addClient(1);
         String actualString = testHamper.getClientList();
-        String expectedString = "1 Adult Male";
+        String expectedString = "1 Adult Male ";
         assertEquals("the output string did not properly create the string", expectedString, actualString);
     }
     /**
