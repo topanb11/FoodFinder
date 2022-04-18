@@ -16,23 +16,42 @@ public class Order {
     private final int ORDERNUMBER = 0;
     private ArrayList<Hamper> hamperItems = new ArrayList<Hamper>();
 
-    public Order() {
-    }
+    /**
+     * Constructor for order class
+     */
+    public Order() {}
 
+    /**
+     * This method is responsible for adding a hamper object to the ArrayList
+     * of hampers
+     * @param hamper This is the hamper object that is being added to the ArrayList
+     * @throws IllegalArgumentException This exception is thrown if an illegal argument
+     * is provided
+     */
     public void addToOrder(Hamper hamper) throws IllegalArgumentException{
         hamperItems.add(hamper);
     }
 
+    /**
+     * This method is a getter that returns the order number
+     * @return int This is the int that corresponds to the order number
+     */
     public int getOrderNumber() {
         return this.ORDERNUMBER;
     }
 
+    /**
+     * This method is a getter that retrieves the ArrayList of hampers
+     * @return ArrayList<Hamper> This is an ArrayList of all the hampers
+     * in the order
+     */
     public ArrayList<Hamper> getHamperItems() {
         return this.hamperItems;
     }
-    
-    // iterate through ArrayList<Food>hamperFood 
-    // all food is already formatted 
+
+    /**
+     * This method is responsible for writing the order into the txt file
+     */
     public void printOrder() {
         int hamperID = 1;
         try {
