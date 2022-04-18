@@ -98,7 +98,7 @@ public class FoodBank extends SQL {
             if(Math.abs(targetMacro - currMacro) >= 50) {
                 ID = searchFood(targetMacro - currMacro, index);
             } else {
-                ID = searchFood((targetMacro - currMacro) + 25, index);
+                ID = searchFood((targetMacro - currMacro) + 50, index);
             }
             Food tmpFood = getFood(ID);
             String line = String.format("%s\t\t%s", tmpFood.getID(), tmpFood.getFoodName());

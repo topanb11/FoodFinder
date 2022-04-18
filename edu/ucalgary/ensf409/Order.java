@@ -72,6 +72,8 @@ public class Order {
                  hamperID++;
              }
             writer.close();
-        } catch (IOException e) {}
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }

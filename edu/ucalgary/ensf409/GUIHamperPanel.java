@@ -20,41 +20,140 @@ import javax.swing.*;
  * Contains 'Remove Hamper' button to get rid of the hampers that users do not need.
  */
 
-public class GUIHamperPanel extends Frame {
+public class GUIHamperPanel extends Frame implements FocusListener{
 
     private JLabel hamperID;
     private JPanel hamperPanel = new JPanel();
-    private static ArrayList<GUIClientPanel> clientPanelArrayList;
+
+    public JTextField getAdultMaleTextField() {
+        return adultMaleTextField;
+    }
+
+    public JTextField getAdultFemaleTextField() {
+        return adultFemaleTextField;
+    }
+
+    public JTextField getChildOver8TextField() {
+        return childOver8TextField;
+    }
+
+    public JTextField getChildUnder8TextField() {
+        return childUnder8TextField;
+    }
+
+    private JTextField adultMaleTextField;
+    private JTextField adultFemaleTextField;
+    private JTextField childOver8TextField;
+    private JTextField childUnder8TextField;
 
     // Constructor
     public GUIHamperPanel(int hamperCount) {
         // formatting
         hamperPanel = new JPanel(new BoxLayout(hamperPanel, BoxLayout.Y_AXIS));
-        hamperPanel.setLayout(new GridLayout(7,1));
+        hamperPanel.setLayout(new GridLayout(5,1));
         hamperPanel.setBorder(BorderFactory.createLineBorder(Color.black));
 
         // hamper ID number
         hamperID = new JLabel("Hamper #" + hamperCount);
 
         // creating a GUIClientPanel for each client type
-        GUIClientPanel adultMalePanel = new GUIClientPanel("Number of Adult Males: ");
-        GUIClientPanel adultFemalePanel = new GUIClientPanel("Number of Adult Females: ");
-        GUIClientPanel childOver8Panel = new GUIClientPanel("Number of Children Over 8: ");
-        GUIClientPanel childUnder8Panel = new GUIClientPanel("Number of Children Under 8: ");
+        JPanel adultMalePanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
+        JLabel adultMaleLabel = new JLabel("Number of Adult Males: ");
+        adultMaleTextField = new JTextField("0", 2);
+        adultMaleTextField.addFocusListener(new FocusListener() {
+            @Override
+            public void focusGained(FocusEvent e) {
+                adultMaleTextField.setText("");
+            }
 
-        // ArrayList of GUIClientPanels
-        clientPanelArrayList = new ArrayList<>();
-        clientPanelArrayList.add(adultMalePanel);
-        clientPanelArrayList.add(adultFemalePanel);
-        clientPanelArrayList.add(childOver8Panel);
-        clientPanelArrayList.add(childUnder8Panel);
+            @Override
+            public void focusLost(FocusEvent e) {
+                if (adultMaleTextField.getText().isEmpty()) {
+                    adultMaleTextField.setText("0");
+                }
+            }
+        });
+        adultMalePanel.add(adultMaleLabel);
+        adultMalePanel.add(adultMaleTextField);
+
+        JPanel adultFemalePanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
+        JLabel adultFemaleLabel = new JLabel("Number of Adult Females: ");
+        adultFemaleTextField = new JTextField("0", 2);
+        adultFemaleTextField.addFocusListener(new FocusListener() {
+            @Override
+            public void focusGained(FocusEvent e) {
+                adultFemaleTextField.setText("");
+            }
+
+            @Override
+            public void focusLost(FocusEvent e) {
+                if (adultFemaleTextField.getText().isEmpty()) {
+                    adultFemaleTextField.setText("0");
+                }
+            }
+        });
+        adultFemalePanel.add(adultFemaleLabel);
+        adultFemalePanel.add(adultFemaleTextField);
+
+        JPanel childOver8Panel = new JPanel(new FlowLayout(FlowLayout.CENTER));
+        JLabel childOver8Label = new JLabel("Number of Children Over 8: ");
+        childOver8TextField = new JTextField("0", 2);
+        childOver8TextField.addFocusListener(new FocusListener() {
+            @Override
+            public void focusGained(FocusEvent e) {
+                childOver8TextField.setText("");
+            }
+
+            @Override
+            public void focusLost(FocusEvent e) {
+                if (childOver8TextField.getText().isEmpty()) {
+                    childOver8TextField.setText("0");
+                }
+            }
+        });
+        childOver8Panel.add(childOver8Label);
+        childOver8Panel.add(childOver8TextField);
+
+        JPanel childUnder8Panel = new JPanel(new FlowLayout(FlowLayout.CENTER));
+        JLabel childUnder8Label = new JLabel("Number of Children Under 8: ");
+        childUnder8TextField = new JTextField("0", 2);
+        childUnder8TextField.addFocusListener(new FocusListener() {
+            @Override
+            public void focusGained(FocusEvent e) {
+                childUnder8TextField.setText("");
+            }
+
+            @Override
+            public void focusLost(FocusEvent e) {
+                if (childUnder8TextField.getText().isEmpty()) {
+                    childUnder8TextField.setText("0");
+                }
+            }
+        });
+        childUnder8Panel.add(childUnder8Label);
+        childUnder8Panel.add(childUnder8TextField);
 
         // add all the components to main Hamper Panel
-        hamperPanel.add(hamperID);
-        hamperPanel.add(adultMalePanel.getClientPanel());
-        hamperPanel.add(adultFemalePanel.getClientPanel());
-        hamperPanel.add(childOver8Panel.getClientPanel());
-        hamperPanel.add(childUnder8Panel.getClientPanel());
+        hamperPanel.add(BorderLayout.NORTH, hamperID);
+        hamperPanel.add(adultMalePanel);
+        hamperPanel.add(adultFemalePanel);
+        hamperPanel.add(childOver8Panel);
+        hamperPanel.add(childUnder8Panel);
+
+    }
+    /**
+     * @param e the event to be processed
+     */
+    @Override
+    public void focusGained(FocusEvent e) {
+
+    }
+    /**
+     * @param e the event to be processed
+     */
+    @Override
+    public void focusLost(FocusEvent e) {
+
     }
 
     /**
@@ -64,11 +163,17 @@ public class GUIHamperPanel extends Frame {
         return this.hamperPanel;
     }
 
-    /**
-     * @return - ArrayList<GUIClientPanel> clientPanelArrayList
-     */
-    public static ArrayList<GUIClientPanel> getClientPanelArrayList() {
-        return clientPanelArrayList;
+    public int getAdultMaleCount() {
+        return Integer.parseInt(adultMaleTextField.getText());
+    }
+    public int getAdultFemaleCount() {
+        return Integer.parseInt(adultFemaleTextField.getText());
+    }
+    public int getChildOver8Count() {
+        return Integer.parseInt(childOver8TextField.getText());
+    }
+    public int getChildUnder8Count() {
+        return Integer.parseInt(childUnder8TextField.getText());
     }
 }
 

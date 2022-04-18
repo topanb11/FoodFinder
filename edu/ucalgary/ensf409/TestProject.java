@@ -25,7 +25,10 @@ public class TestProject {
     @Test
     public void testOrderConstructor() {
         Order testOrder = new Order();
+<<<<<<< Updated upstream
         int actualID = testOrder.getOrderNumber();
+=======
+>>>>>>> Stashed changes
         assertNotNull("Order constructor did not create and object: ", testOrder);
     }
 
