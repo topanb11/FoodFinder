@@ -14,10 +14,6 @@ import static org.junit.Assert.*;
 
 public class TestProject {
 
-    public TestProject(){
-
-    }
-
     /**
      * The order class creates an order object. If this object is not created (null)
      * the constructor failed.
@@ -25,10 +21,6 @@ public class TestProject {
     @Test
     public void testOrderConstructor() {
         Order testOrder = new Order();
-<<<<<<< Updated upstream
-        int actualID = testOrder.getOrderNumber();
-=======
->>>>>>> Stashed changes
         assertNotNull("Order constructor did not create and object: ", testOrder);
     }
 
