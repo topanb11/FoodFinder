@@ -30,12 +30,25 @@ public class Hamper {
         this.clientNumber.add(client);
     }
 
+    public void removeClient(int clientIndex){
+        if(clientIndex >= this.clientNumber.size()){
+            throw new IllegalArgumentException("Index not in the client list");
+        }
+        this.clientNumber.remove(clientIndex);
+    }
     /**
      * This method gets the ArrayList of clients
-     * @return ArrayList<Client> this returns the ArrayList clientNumber;
+     * @return ArrayList<Client> this returns the ArrayList clientNumber
      */
     public ArrayList<Client> getClient(){
         return this.clientNumber;
+    }
+    /**
+     * This method gets the ArrayList of food
+     * @return ArrayList<String> this returns the ArrayList hamperFood
+     */
+    public ArrayList<String> getFood(){
+        return this.hamperFood;
     }
     /**
      * This method calculates the total number of nutrients needed for the hamper
@@ -86,6 +99,13 @@ public class Hamper {
                 }
             }
         }
+    }
+    /**
+     * This method manually adds to the foodHamper arrayList
+     * @param food is the data of a food in String form.
+     */
+    public void addFood(String food){
+        this.hamperFood.add(food);
     }
     /**
      * This method turns the clientNumber ArrayList into a String with the amount of clients

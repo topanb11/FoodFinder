@@ -53,16 +53,16 @@ public class TestProject {
     /**
      * This test adds a client to a hamper object and checks to see if the client was succesfully added.
      */
-//    @Test
-//    public void testHamperAddClientToHamperGoodData(){
-//        Hamper testHamper = new Hamper();
-//        Client testClient = new Client(1);
-//        testHamper.addClient(1);
-//        ArrayList<Client> expectedList = new ArrayList<Client>();
-//        expectedList.add(testClient);
-//        foundList = testHamper.getClientList();
-//        assertEquals("Method addClientToHamper did not return the expected result: ", expectedList, foundList);
-//    }
+    @Test
+    public void testHamperAddClientToHamperGoodData(){
+        Hamper testHamper = new Hamper();
+        Client testClient = new Client(1);
+        testHamper.addClient(1);
+        ArrayList<Client> expectedList = new ArrayList<Client>();
+        expectedList.add(testClient);
+        ArrayList<Client> foundList = testHamper.getClient();
+        assertEquals("Method addClientToHamper did not return the expected result: ", expectedList, foundList);
+    }
 
     /**
      * Creates a hamper object and adds a client to the hamper with an invalid integer.
@@ -286,52 +286,97 @@ public class TestProject {
      * Creates a hamper and client object. it then adds the client to the hamper and checks to see if the returned arraylist
      * matches the expected arraylist with the client object added.
      */
-//    @Test
-//    public void getClientTest(){
-//        Hamper testHamper = new Hamper();
-//        Client testClient = new Client(1);
-//        testHamper.addClientToHamper(testClient.getClientInfo());
-//        ArrayList<Client> expectedList = new ArrayList<Client>();
-//        expectedList.add(testClient);
-//        Client testClient1 = new Client(2);
-//        testHamper.addClientToHamper(testClient1.getClientInfo());
-//        expectedList.add(testClient1);
-//        ArrayList<Client> foundList = testHamper.getClient();
-//        assertEquals("The returned ArrayList was not correct: ", expectedList, foundList);
-//    }
+    @Test
+    public void getClientTest(){
+        Hamper testHamper = new Hamper();
+        Client testClient = new Client(1);
+        testHamper.addClient(1);
+        ArrayList<Client> expectedList = new ArrayList<Client>();
+        expectedList.add(testClient);
+        Client testClient1 = new Client(2);
+        testHamper.addClient(2);
+        expectedList.add(testClient1);
+        ArrayList<Client> foundList = testHamper.getClient();
+        assertEquals("The returned ArrayList was not correct: ", expectedList, foundList);
+    }
 
     /**
-     * Creates a hamper and client object. It then adds the client to the hamper before removing it. Checks to see if the client
+     * Creates a hamper object. It then adds a client to the hamper before removing it. Checks to see if the client
      * was correctly removed.
      */
-//    @Test
-//    public void removeClientTestValidData(){
-//        Hamper testHamper = new Hamper();
-//        Client testClient = new Client(1);
-//        testHamper.addClientToHamper(testClient.getClientInfo());
-//        testHamper.removeClient(1);
-//        ArrayList<Client> expectedList = new ArrayList<Client>();
-//        ArrayList<Client> foundList = testHamper.getClientList();
-//        assertEquals("edu.ucalgary.ensf409.Client was not removed properly: ", expectedList, foundList);
-//    }
+    @Test
+    public void removeClientTestValidData(){
+        Hamper testHamper = new Hamper();
+        testHamper.addClient(1);
+        testHamper.removeClient(0);
+        ArrayList<Client> expectedList = new ArrayList<Client>();
+        ArrayList<Client> foundList = testHamper.getClient();
+        assertEquals("edu.ucalgary.ensf409.Client was not removed properly: ", expectedList, foundList);
+    }
 
     /**
      * Creates a hamper and client object. It adds a client object before removing a client object that doesn't exist.
      */
-//    @Test
-//    public void removeClientTestInvalidData(){
-//        boolean correctExeption = false;
-//        try{
-//            Hamper testHamper = new Hamper();
-//            Client testClient = new Client(1);
-//            testHamper.addClientToHamper(testClient.getClientInfo());
-//            testHamper.removeClient(5);
-//        }catch(IllegalArgumentException e){
-//            correctExeption = true;
-//        }
-//        assertEquals("removeClient did not properly throw and exception: ", true, correctExeption);
-//    }
+    @Test
+    public void removeClientTestInvalidData(){
+        boolean correctExeption = false;
+        try{
+            Hamper testHamper = new Hamper();
+            testHamper.addClient(1);
+            testHamper.removeClient(5);
+        }catch(IllegalArgumentException e){
+            correctExeption = true;
+        }
+        assertEquals("removeClient did not properly throw and exception: ", true, correctExeption);
+    }
+    /**
+     * Creates a hamper object and adds a client to it then calculates the nutritional needs and checks
+     * if it matches the expected nutrients.
+     */
+    @Test
+    public void calculateNutTest(){
+        Hamper testHamper = new Hamper();
+        testHamper.addClient(1);
+        double[] actualNut = testHamper.calculateNut();
+        double[] expectedNut = {2800, 4900, 4550, 5250, 17500};
+        assertEquals("the calculated nutrients did not match the actual nutrients", expectedNut, actualNut);
+    }
+    /**
+     * Creates a hamper object and adds a client to it and checks if the client list string is properly output
+     */
+    @Test
+    public void getClientListTest(){
+        Hamper testHamper = new Hamper();
+        testHamper.addClient(1);
+        String actualString = testHamper.getClientList();
+        String expectedString = "1 Adult Male";
+        assertEquals("the output string did not properly create the string", expectedString, actualString);
+    }
+    /**
+     * Creates a hamper object and adds food to it and checks if the food was properly added
+     */
+    @Test
+    public void addFoodTest(){
+        Hamper testHamper = new Hamper();
+        testHamper.addFood("Tomato");
+        ArrayList<String> actualList = testHamper.getFood();
+        ArrayList<String> expectedList = new ArrayList<>();
+        expectedList.add("Tomato");
+        assertEquals("the method did not properly add food to the hamper", expectedList, actualList);
+    }
 
+    /**
+     * Creates a hamper object and adds multiple foods and checks to see if the food list string is properly output.
+     */
+    @Test
+    public void getFoodListTest(){
+        Hamper testHamper = new Hamper();
+        testHamper.addFood("Tomato");
+        testHamper.addFood("Potato");
+        String actualString = testHamper.getFoodList();
+        String expectedString = "Tomato\nPotato\n";
+        assertEquals("the output string did not properly create the string", expectedString, actualString);
+    }
     /**
      * Creates a client object and checks to see if the correct enumeration (type) was created in association with the
      * client object.
