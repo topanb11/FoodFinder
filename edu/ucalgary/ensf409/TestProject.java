@@ -10,7 +10,6 @@ package edu.ucalgary.ensf409;
 import java.sql.SQLException;
 import java.util.*;
 import org.junit.*;
-import org.testing.annotations.Test;
 import static org.junit.Assert.*;
 
 public class TestProject {
@@ -150,7 +149,7 @@ public class TestProject {
             e.printStackTrace();
         }
         int foundID = testBank.searchFood(635, 0);
-        int expectedID = 88;
+        int expectedID = 142;
         assertEquals("Method searchFood did not return the expected result: ", expectedID, foundID);
     }
 
@@ -339,7 +338,7 @@ public class TestProject {
         testHamper.addClient(1);
         double[] actualNut = testHamper.calculateNut();
         double[] expectedNut = {2800, 4900, 4550, 5250, 17500};
-        assertArrayEquals("The calculated nutrients does not match the expected nutrients", expectedNut, actualNut, 0);
+        assertArrayEquals("The calculated nutrients does not match the expected nutrients", expectedNut, actualNut, 0.05);
     }
     /**
      * Creates a hamper object and adds a client to it and checks if the client list string is properly output
@@ -406,13 +405,10 @@ public class TestProject {
         double foundProtein = testClient.getProtein();
         double foundOther = testClient.getOther();
         double foundCalories = testClient.getCalories();
-        assertEquals("The getter for grain returns an incorrect double: ", expectedGrain, foundGrain);
-        assertEquals("The getter for fruit and veggies returns an incorrect double: ", expectedFV, foundFV);
-        assertEquals("The getter for protein returns an incorrect double: ", expectedProtein, foundProtein);
-        assertEquals("The getter for other returns an incorrect double: ", expectedOther, foundOther);
-        assertEquals("The getter for calories returns an incorrect double: ", expectedCalories, foundCalories);
+        assertEquals("The getter for grain returns an incorrect double: ", expectedGrain, foundGrain, 0.05);
+        assertEquals("The getter for fruit and veggies returns an incorrect double: ", expectedFV, foundFV, 0.05);
+        assertEquals("The getter for protein returns an incorrect double: ", expectedProtein, foundProtein, 0.05);
+        assertEquals("The getter for other returns an incorrect double: ", expectedOther, foundOther, 0.05);
+        assertEquals("The getter for calories returns an incorrect double: ", expectedCalories, foundCalories, 0.05);
     }
-
-    @Test
-    public void 
 }
