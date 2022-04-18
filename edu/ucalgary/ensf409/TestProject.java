@@ -232,33 +232,12 @@ public class TestProject {
         assertEquals("Method deleteFromDB did not delete from the database:", expected, actual);
     }
 
-//    @Test
-//    public void testAddToOrder() {
-//        Hamper testHamper = new Hamper();
-//        Order testOrder = new Order();
-//        testOrder.addToOrder(testHamper);
-//        String foundOrder = testOrder.printOrder();
-//        String expectedOrder = "some order w hamper items";
-//
-//        assertEquals("Method addToOrder did not return the expected result: ",expectedOrder, foundOrder);
-//    }
-
-//    @Test
-//    public void testPrintOrder() {
-//        Hamper testHamper = new Hamper();
-//        Order testOrder = new Order();
-//        String foundOrder = testOrder.printOrder();
-//        String expectedOrder = "some order";
-//
-//        assertEquals("Method printOrder did not return the expected result: ",expectedOrder, foundOrder);
-//    }
-
     /**
      * Creates a client object and checks to see if the object is null. It then checks if the returned client object
      * has the correct type.
      */
     @Test
-    public void clientConstructorTestGoodData(){
+    public void testClientConstructorTestGoodData(){
         Client testClient = new Client(2);
         assertNotNull("The constructor did not make a client object: ", testClient);
         String expectedClientType = "Adult Female";
@@ -270,7 +249,7 @@ public class TestProject {
      * Creates a client object with bad data. Checks to see if client constructor throws the correct constructor.
      */
     @Test
-    public void clientConstructorTestBadData(){
+    public void testClientConstructorTestBadData(){
         boolean correctException = false;
         try{
             Client testClient = new Client(893);
@@ -286,7 +265,7 @@ public class TestProject {
      * matches the expected arraylist with the client object added.
      */
     @Test
-    public void getClientTest(){
+    public void testGetClient(){
         Hamper testHamper = new Hamper();
         testHamper.addClient(1);
         testHamper.addClient(2);
@@ -302,7 +281,7 @@ public class TestProject {
      * was correctly removed.
      */
     @Test
-    public void removeClientTestValidData(){
+    public void testRemoveClientTestValidData(){
         Hamper testHamper = new Hamper();
         testHamper.addClient(1);
         testHamper.removeClient(0);
@@ -315,7 +294,7 @@ public class TestProject {
      * Creates a hamper and client object. It adds a client object before removing a client object that doesn't exist.
      */
     @Test
-    public void removeClientTestInvalidData(){
+    public void testRemoveClientTestInvalidData(){
         boolean correctExeption = false;
         try{
             Hamper testHamper = new Hamper();
@@ -331,7 +310,7 @@ public class TestProject {
      * if it matches the expected nutrients.
      */
     @Test
-    public void calculateNutTest(){
+    public void testCalculateNut(){
         Hamper testHamper = new Hamper();
         testHamper.addClient(1);
         double[] actualNut = testHamper.calculateNut();
@@ -342,7 +321,7 @@ public class TestProject {
      * Creates a hamper object and adds a client to it and checks if the client list string is properly output
      */
     @Test
-    public void getClientListTest(){
+    public void testGetClientList(){
         Hamper testHamper = new Hamper();
         testHamper.addClient(1);
         String actualString = testHamper.getClientList();
@@ -353,7 +332,7 @@ public class TestProject {
      * Creates a hamper object and adds food to it and checks if the food was properly added
      */
     @Test
-    public void addFoodTest(){
+    public void testAddFood(){
         Hamper testHamper = new Hamper();
         testHamper.addFood("Tomato");
         ArrayList<String> actualList = testHamper.getFood();
@@ -366,7 +345,7 @@ public class TestProject {
      * Creates a hamper object and adds multiple foods and checks to see if the food list string is properly output.
      */
     @Test
-    public void getFoodListTest(){
+    public void testGetFoodList(){
         Hamper testHamper = new Hamper();
         testHamper.addFood("Tomato");
         testHamper.addFood("Potato");
@@ -379,7 +358,7 @@ public class TestProject {
      * client object.
      */
     @Test
-    public void getClientInfoTest(){
+    public void testGetClientInfo(){
         Client testClient = new Client(2);
         ClientType expectedClientType = ClientType.ADULTFEMALE;
         ClientType foundClientType = testClient.getClientInfo();
@@ -391,7 +370,7 @@ public class TestProject {
      * client object.
      */
     @Test
-    public void clientTestGetters(){
+    public void testClientTestGetters(){
         Client testClient = new Client(1);
         int expectedGrain = 16;
         int expectedFV = 28;
