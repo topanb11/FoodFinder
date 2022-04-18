@@ -3,7 +3,7 @@ package edu.ucalgary.ensf409;
 /*
     Group 2 edu.ucalgary.ensf409.Food Bank
     Members: Topan Budiman, Maxwell Couture, Mark Ngu, Jason Nguyen
-    version: @1.5
+    version: @1.6
     since: @1.0
  */
 
@@ -24,6 +24,9 @@ public class TestProject {
         assertNotNull("Order constructor did not create and object: ", testOrder);
     }
 
+    /**
+     * This method is responsible for adding a hamper to the order
+     */
     @Test
     public void testAddToOrder() {
         Order testOrder = new Order();
@@ -190,11 +193,11 @@ public class TestProject {
             testBank.fillFood(actualMacros[i], nutNeeds[i], actualMacros, i);
         }
 
-        assertEquals("Method fillFood did not fill grain content as expected result: ",8737, actualMacros[0], 0.05);
-        assertEquals("Method fillFood did not fill fruit & veggie content as expected result: ",11650.34, actualMacros[1] , 0.05);
-        assertEquals("Method fillFood did not fill protein content as expected result: ",10172.66, actualMacros[2], 0.05);
-        assertEquals("Method fillFood did not fill other content as expected result: ",7161, actualMacros[3], 0.05);
-        assertEquals("Method fillFood did not fill protein content as expected result: ",37721, actualMacros[4], 0.05);
+        assertEquals("Method fillFood did not fill grain content as expected result: ",7020, actualMacros[0], 0.05);
+        assertEquals("Method fillFood did not fill fruit & veggie content as expected result: ",10427.6, actualMacros[1] , 0.05);
+        assertEquals("Method fillFood did not fill protein content as expected result: ",9763.0, actualMacros[2], 0.05);
+        assertEquals("Method fillFood did not fill other content as expected result: ",11275.8, actualMacros[3], 0.05);
+        assertEquals("Method fillFood did not fill protein content as expected result: ",38367, actualMacros[4], 0.05);
     }
 
     /**
