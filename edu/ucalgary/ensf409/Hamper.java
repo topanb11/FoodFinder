@@ -12,7 +12,6 @@ import java.util.ArrayList;
 
 public class Hamper {
     private ArrayList<Client> clientNumber;
-    private static int hamperID;
     private ArrayList<String> hamperFood;
     /**
      * This is the constructor for the hamper

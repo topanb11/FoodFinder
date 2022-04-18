@@ -24,16 +24,14 @@ public class TestProject {
      */
     @Test
     public void testOrderConstructor() {
-        int expectedID = 1;
-        Order testOrder = new Order(expectedID);
+        Order testOrder = new Order();
         int actualID = testOrder.getOrderNumber();
-        assertEquals("Order has incorrect ID", expectedID, actualID);
         assertNotNull("Order constructor did not create and object: ", testOrder);
     }
 
     @Test
     public void testAddToOrder() {
-        Order testOrder = new Order(1);
+        Order testOrder = new Order();
         Hamper testHamper = new Hamper();
         testOrder.addToOrder(testHamper);
         assertNotNull("addToOrder() did not add the hamper to the order: ", testOrder);
