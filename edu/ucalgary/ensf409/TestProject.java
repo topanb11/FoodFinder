@@ -339,7 +339,7 @@ public class TestProject {
         testHamper.addClient(1);
         double[] actualNut = testHamper.calculateNut();
         double[] expectedNut = {2800, 4900, 4550, 5250, 17500};
-        assertEquals("the calculated nutrients did not match the actual nutrients", expectedNut, actualNut);
+        assertArrayEquals("The calculated nutrients does not match the expected nutrients", expectedNut, actualNut, 0);
     }
     /**
      * Creates a hamper object and adds a client to it and checks if the client list string is properly output
