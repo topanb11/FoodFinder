@@ -1,7 +1,7 @@
 /*
     Group 2 edu.ucalgary.ensf409.Food Bank
     Members: Topan Budiman, Maxwell Couture, Mark Ngu, Jason Nguyen
-    version: @1.3
+    version: @1.4
     since: @1.0
  */
 
@@ -25,7 +25,7 @@ public class Client extends SQL{
             initializeConnection();
             Statement myStmt = getDbConnect().createStatement();
             ResultSet clientInfo = myStmt.executeQuery("SELECT * FROM DAILY_CLIENT_NEEDS");
-            if (type == 0) {
+            if (type == 1) {
                 this.clientType = ClientType.ADULTMALE;
                 while(clientInfo.next()){
                     if(clientInfo.getString("Client").equals("Adult Male")){
@@ -37,24 +37,12 @@ public class Client extends SQL{
                         break;
                     }
                 }
-            } else if (type == 1) {
+            } else if (type == 2) {
                 this.clientType = ClientType.ADULTFEMALE;
                 while(clientInfo.next()){
                     if(clientInfo.getString("Client").equals("Adult Female")){
                         this.WHOLEGRAINS = (double)clientInfo.getInt("WholeGrains")/100;
-                        this.FRUITVEGGIES = (double)clientInfo.getInt("FruitsVeggies")/100;
-                        this.PROTEIN = (double)clientInfo.getInt("Protein")/100;
-                        this.OTHER = (double)clientInfo.getInt("Other")/100;
-                        this.CALORIES = clientInfo.getInt("Calories");
-                        break;
-                    }
-                }
-            } else if (type == 2) {
-                this.clientType = ClientType.CHILDOVER8;
-                while(clientInfo.next()){
-                    if(clientInfo.getString("Client").equals("Child over 8")){
-                        this.WHOLEGRAINS = (double)clientInfo.getInt("WholeGrains")/100;
-                        this.FRUITVEGGIES = (double)clientInfo.getInt("FruitsVeggies")/100;
+                        this.FRUITVEGGIES = (double)clientInfo.getInt("FruitVeggies")/100;
                         this.PROTEIN = (double)clientInfo.getInt("Protein")/100;
                         this.OTHER = (double)clientInfo.getInt("Other")/100;
                         this.CALORIES = clientInfo.getInt("Calories");
@@ -62,11 +50,23 @@ public class Client extends SQL{
                     }
                 }
             } else if (type == 3) {
+                this.clientType = ClientType.CHILDOVER8;
+                while(clientInfo.next()){
+                    if(clientInfo.getString("Client").equals("Child over 8")){
+                        this.WHOLEGRAINS = (double)clientInfo.getInt("WholeGrains")/100;
+                        this.FRUITVEGGIES = (double)clientInfo.getInt("FruitVeggies")/100;
+                        this.PROTEIN = (double)clientInfo.getInt("Protein")/100;
+                        this.OTHER = (double)clientInfo.getInt("Other")/100;
+                        this.CALORIES = clientInfo.getInt("Calories");
+                        break;
+                    }
+                }
+            } else if (type == 4) {
                 this.clientType = ClientType.CHILDUNDER8;
                 while(clientInfo.next()){
                     if(clientInfo.getString("Client").equals("Child under 8")){
                         this.WHOLEGRAINS = (double)clientInfo.getInt("WholeGrains")/100;
-                        this.FRUITVEGGIES = (double)clientInfo.getInt("FruitsVeggies")/100;
+                        this.FRUITVEGGIES = (double)clientInfo.getInt("FruitVeggies")/100;
                         this.PROTEIN = (double)clientInfo.getInt("Protein")/100;
                         this.OTHER = (double)clientInfo.getInt("Other")/100;
                         this.CALORIES = clientInfo.getInt("Calories");
@@ -79,7 +79,6 @@ public class Client extends SQL{
         }catch(SQLException e){
             e.printStackTrace();
         }
-
     }
     /**
      * This method is a getter for the client type
@@ -122,9 +121,5 @@ public class Client extends SQL{
      */
     public double getGrain(){
         return this.WHOLEGRAINS;
-    }
-
-    public static void main(String[] args) {
-        Client cocklicker = new Client(0);
     }
 }

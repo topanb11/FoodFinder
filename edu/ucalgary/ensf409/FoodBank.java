@@ -1,7 +1,7 @@
 /*
     Group 2 edu.ucalgary.ensf409.Food Bank
     Members: Topan Budiman, Maxwell Couture, Mark Ngu, Jason Nguyen
-    version: @1.8
+    version: @1.9
     since: @1.0
 
     This class is responsible for connecting to the database as well as maintaining the
@@ -21,7 +21,10 @@ public class FoodBank extends SQL {
     /**
      * This is the constructor for the FoodBank object
      */
-    public FoodBank() {}
+    public FoodBank() throws SQLException{
+        initializeConnection();
+        storeFood();
+    }
 
     /**
      * This is a getter that retrieves the food item from the foodList
@@ -65,8 +68,8 @@ public class FoodBank extends SQL {
                     foodMacro = tmpItem.getCalories();
                     break;
             }
-            double currDiff = Math.abs(targetMacro - foodMacro);
-            if(currDiff < prevDiff + 100){
+            double currDiff = targetMacro - foodMacro;
+            if(currDiff < prevDiff && currDiff > 0){
                 prevDiff = currDiff;
                 ID = tmpItem.getID();
             }
@@ -91,7 +94,12 @@ public class FoodBank extends SQL {
         if(currMacro > targetMacro){
             return foodCart;
         } else {
-            int ID = searchFood(targetMacro - currMacro, index);
+            int ID = 0;
+            if(Math.abs(targetMacro - currMacro) >= 50) {
+                ID = searchFood(targetMacro - currMacro, index);
+            } else {
+                ID = searchFood((targetMacro - currMacro) + 25, index);
+            }
             Food tmpFood = getFood(ID);
             String line = String.format("%s\t\t%s", tmpFood.getID(), tmpFood.getFoodName());
             deleteFromDB(tmpFood.getFoodName());

@@ -1,12 +1,13 @@
 /*
     Group 2 edu.ucalgary.ensf409.Food Bank
     Members: Topan Budiman, Maxwell Couture, Mark Ngu, Jason Nguyen
-    version: @1.3
+    version: @1.4
     since: @1.0
  */
 
 package edu.ucalgary.ensf409;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class Hamper {
@@ -16,9 +17,9 @@ public class Hamper {
     /**
      * This is the constructor for the hamper
      */
-    public Hamper(){
+    public Hamper() {
         this.clientNumber = new ArrayList<>();
-        this.hamperFood = new ArrayList<>();
+        hamperFood = new ArrayList<>();
     }
     /**
      * This method adds a client to the ArrayList clientNumber
@@ -28,23 +29,26 @@ public class Hamper {
         Client client = new Client(clientType);
         this.clientNumber.add(client);
     }
-    /**
-     * This method removes a client from a given index and throws an IllegalArgumentException when the index is
-     * greater than or equal to the size of the ArrayList
-     * @param clientID the index from which a client is removed from the ArrayList
-     */
-    public void removeClient(int clientID){
-        if(clientID >= this.clientNumber.size()){
-            throw new IllegalArgumentException("Index not in the ArrayList");
+
+    public void removeClient(int clientIndex){
+        if(clientIndex >= this.clientNumber.size()){
+            throw new IllegalArgumentException("Index not in the client list");
         }
-        this.clientNumber.remove(clientID);
+        this.clientNumber.remove(clientIndex);
     }
     /**
      * This method gets the ArrayList of clients
-     * @return ArrayList<Client> this returns the ArrayList clientNumber;
+     * @return ArrayList<Client> this returns the ArrayList clientNumber
      */
     public ArrayList<Client> getClient(){
         return this.clientNumber;
+    }
+    /**
+     * This method gets the ArrayList of food
+     * @return ArrayList<String> this returns the ArrayList hamperFood
+     */
+    public ArrayList<String> getFood(){
+        return this.hamperFood;
     }
     /**
      * This method calculates the total number of nutrients needed for the hamper
@@ -65,16 +69,43 @@ public class Hamper {
      * This method fills the hamperFood ArrayList based on the calculated nutrients of the hamper
      */
     public void fillHamper(){
-        FoodBank bank = new FoodBank();
-        bank.initializeConnection();
-        bank.storeFood();
+        FoodBank bank = null;
+        try {
+            bank = new FoodBank();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
         double[] expected = calculateNut();
         double[] actual = {0, 0, 0, 0, 0};
-        bank.initializeConnection();
-        bank.storeFood();
-        for(int i = 0; i < actual.length; i++){
+        for (int i = 0; i < actual.length; i++) {
             this.hamperFood = bank.fillFood(actual[i], expected[i], actual, i);
         }
+        for(int i = 0; i < actual.length; i++){
+            if(actual[i] < expected[i]){
+                if(i == 0){
+                    System.out.println("Not enough grains");
+                }
+                if(i == 1){
+                    System.out.println("Not enough fruits and veggies");
+                }
+                if(i == 2){
+                    System.out.println("Not enough protein");
+                }
+                if(i == 3){
+                    System.out.println("Not enough other nutrients");
+                }
+                if(i == 4){
+                    System.out.println("Not enough calories");
+                }
+            }
+        }
+    }
+    /**
+     * This method manually adds to the foodHamper arrayList
+     * @param food is the data of a food in String form.
+     */
+    public void addFood(String food){
+        this.hamperFood.add(food);
     }
     /**
      * This method turns the clientNumber ArrayList into a String with the amount of clients
@@ -101,16 +132,16 @@ public class Hamper {
             }
         }
         if(adultMaleNum > 0){
-            list += (adultMaleNum + " Adult Male, ");
+            list += (adultMaleNum + " Adult Male");
         }
         if(adultFemaleNum > 0){
-            list += (adultFemaleNum + " Adult Female, ");
+            list += (", " + adultFemaleNum + " Adult Female");
         }
         if(childOver8Num > 0){
-            list += (childOver8Num + " Child Over 8, ");
+            list += (", " + childOver8Num + " Child Over 8");
         }
         if(childUnder8Num > 0){
-            list += (childUnder8Num + " Child Under 8");
+            list += (", " + childUnder8Num + " Child Under 8");
         }
         return list;
     }
