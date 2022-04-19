@@ -11,12 +11,13 @@
 ```
 git clone
 ```
-2. Compile all java files<br>
+2. Compile GUI file
 ```
-javac edu/ucalgary/ensf409/*.java
+javac edu/ucalgary/ensf409/GUI.java
 ```
 3. Run the GUI file to launch the application
 ```
-
+java -cp .:lib/mysql-connector-java-8.0.23.jar edu.ucalgary.ensf409.GUI
 ```
+If you're on windows change ``.:`` to ```.;```
 

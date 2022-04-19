@@ -1,3 +1,13 @@
+/*
+    Group 2 edu.ucalgary.ensf409.Food Bank
+    Members: Topan Budiman, Maxwell Couture, Mark Ngu, Jason Nguyen
+    version: @1.3
+    since: @1.0
+
+    This interface is responsible for sharing the SQL database methods to the FoodBank
+    and Client class
+ */
+
 package edu.ucalgary.ensf409;
 
 import java.sql.Connection;
